@@ -10,7 +10,12 @@ include_directories(
 
 
 add_library(ApeX
-	src/ApeX/Core.cpp	src/ApeX/Core.h	
+	src/ApeX/ApeX.h
+	src/ApeX/Core.cpp
+	src/ApeX/Core.h	
+
+	src/ApeX/Entity.h
+	src/ApeX/Component.h
 )
 
 add_executable(demo

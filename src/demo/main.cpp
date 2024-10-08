@@ -1,12 +1,26 @@
 #include <iostream>
-#include <ApeX/Core.h>
+#include <ApeX/apex.h>
+
+using namespace apex;
+
+struct Test   //::Component
+{
+	int m_temp;
+};
 
 int main()
 {
-	std::cout << "Hello World" << std::endl;
+	std::shared_ptr<Core> core = Core::initialize();
 
-	dummy();
-	
-  return(0);
+	std::shared_ptr<Entity> ent = core->add_entity();
+	ent->add_component<Test>();
 
+
+
+	core->start();
+
+
+	//std::cout << "Hello World" << std::endl;
+
+	return(0);
 }
