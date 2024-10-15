@@ -13,9 +13,11 @@ add_library(ApeX
 	src/ApeX/ApeX.h
 	src/ApeX/Core.cpp
 	src/ApeX/Core.h	
-
+	src/ApeX/Entity.cpp
 	src/ApeX/Entity.h
 	src/ApeX/Component.h
+	src/ApeX/Component.cpp
+
 )
 
 add_executable(demo

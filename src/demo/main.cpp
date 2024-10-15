@@ -3,9 +3,21 @@
 
 using namespace apex;
 
-struct Test   //::Component
+struct Player : Component
 {
-	int m_temp;
+	//int m_dummy;
+
+	void on_initialize() //virtual functions?? within component
+	{
+		printf("Player::initialize\n");
+	}
+
+	void on_tick()
+	{
+		printf("Player::tick\n");
+	}
+
+
 };
 
 int main()
@@ -13,7 +25,7 @@ int main()
 	std::shared_ptr<Core> core = Core::initialize();
 
 	std::shared_ptr<Entity> ent = core->add_entity();
-	ent->add_component<Test>();
+	ent->add_component<Player>();
 
 
 
