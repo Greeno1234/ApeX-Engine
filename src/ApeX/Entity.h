@@ -9,6 +9,13 @@ namespace apex
 
 	struct Entity
 	{
+		/*
+		template <typename T>
+
+		std::shared_ptr<T> add_component();
+		*/
+
+		void kill();
 		template <typename T>
 		std::shared_ptr<T> add_component()
 		{
@@ -22,18 +29,20 @@ namespace apex
 			return rtn;
 		}
 
+
+
+
 	private:
 
 		friend struct apex::Core; //friend allows for private functions to be accessed by core struct
 
+		void tick();
+		void display();
 
-
+		std::vector<std::shared_ptr<Component> > m_components;
+		bool m_alive;
 		std::weak_ptr<Core> m_core;
 		std::weak_ptr<Entity> m_self;
-		std::vector<std::shared_ptr<Component> > m_components;
-
-		void tick();
-
 		//down the hierarchy use shared ptr
 		//up the hierarchy use weak ptr
 	};

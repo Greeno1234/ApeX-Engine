@@ -8,17 +8,22 @@ namespace apex
 
 	struct Component
 	{
-		virtual void on_initialize();
-		virtual void on_tick();
+		
+		
 
 
 	private:
 		
 		friend struct apex::Entity;
-		
+		virtual void on_initialize();
+		virtual void on_tick();
+		//virtual void onDisplay();
+
+
 		std::weak_ptr<Entity> m_entity;
 		
 		void tick();
+		//void display();
 		//int m_dummy;
 	};
 

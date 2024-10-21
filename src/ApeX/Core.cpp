@@ -9,7 +9,10 @@ namespace apex {
 	std::shared_ptr<Core> Core::initialize()
 	{
 		std::shared_ptr<Core> rtn = std::make_shared<Core>();
+
 		rtn->m_self = rtn;
+		//rtn->m_nativeWindow = SDL_CreateWindow();
+
 
 		return rtn;
 	}
@@ -25,7 +28,7 @@ namespace apex {
 
 		m_entities.push_back(rtn);
 
-		std::cout << rtn->m_core.lock().get() << std::endl;
+		//std::cout << rtn->m_core.lock().get() << std::endl;   ///idk what this does
 
 		return rtn;
 	}
@@ -33,6 +36,10 @@ namespace apex {
 
 	void Core::start()
 	{
+
+		//m_running = true;
+		//while m_running{.....}
+
 		for (size_t i = 0; i < 25; i++)
 		{
 			for (size_t ei = 0; ei < m_entities.size(); ei++)
@@ -40,6 +47,22 @@ namespace apex {
 				m_entities.at(ei)->tick();
 			}
 			std::cout << i << std::endl;
+
+			for (size_t ei = 0; ei < m_entities.size(); ei++)
+			{
+				//if (!m_entities.alive())
+				//{
+				//
+				//}
+			}
+
+
+
+
+
+
+
+
 		}
 	}
 
