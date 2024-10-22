@@ -22,6 +22,9 @@ add_library(ApeX
 
 add_executable(demo
   src/demo/main.cpp
-  src/demo/Employee.cpp src/demo/Employee.h
+  src/demo/Employee.cpp
+  src/demo/Employee.h
+  src/demo/TriangleRenderer.cpp
+  src/demo/TriangleRenderer.h
 )
 target_link_libraries(demo ApeX)

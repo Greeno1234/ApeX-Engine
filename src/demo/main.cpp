@@ -1,5 +1,9 @@
 #include <iostream>
 #include <ApeX/apex.h>
+#include "TriangleRenderer.h"
+
+
+
 
 using namespace apex;
 
@@ -31,6 +35,8 @@ int main()
 
 	core->start();
 
+
+	std::cout << "test";
 
 	//std::cout << "Hello World" << std::endl;
 
