@@ -30,6 +30,15 @@ namespace apex {
 		}
 	}
 
+
+	void Entity::render()
+	{
+		for (size_t ci = 0; ci < m_components.size(); ci++)
+		{
+			m_components.at(ci)->render();
+		}
+	}
+
 	void Entity::kill()
 	{
 		if (!m_alive) return;

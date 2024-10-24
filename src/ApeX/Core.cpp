@@ -11,7 +11,7 @@ namespace apex {
 		std::shared_ptr<Core> rtn = std::make_shared<Core>();
 
 		rtn->m_self = rtn;
-		//rtn->m_nativeWindow = SDL_CreateWindow();
+		//rtn->m_nativeWindow = SDL_CreateWindow("OpenGL Demo", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
 
 
 		return rtn;
@@ -28,7 +28,7 @@ namespace apex {
 
 		m_entities.push_back(rtn);
 
-		//std::cout << rtn->m_core.lock().get() << std::endl;   ///idk what this does
+		//std::cout << rtn->m_core.lock().get() << std::endl;   ///checks that it isnt empty
 
 		return rtn;
 	}
@@ -37,32 +37,23 @@ namespace apex {
 	void Core::start()
 	{
 
-		//m_running = true;
-		//while m_running{.....}
-
-		for (size_t i = 0; i < 25; i++)
+		m_running = true;
+		while (m_running)
 		{
+
 			for (size_t ei = 0; ei < m_entities.size(); ei++)
 			{
 				m_entities.at(ei)->tick();
 			}
-			std::cout << i << std::endl;
-
 			for (size_t ei = 0; ei < m_entities.size(); ei++)
 			{
 				//if (!m_entities.alive())
 				//{
 				//
 				//}
+				m_entities.at(ei)->render();
+
 			}
-
-
-
-
-
-
-
-
 		}
 	}
 

@@ -1,5 +1,6 @@
 #include <memory>
 #include <vector>
+#include <SDL2/SDL.h>
 
 namespace apex
 {

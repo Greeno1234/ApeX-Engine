@@ -1,6 +1,5 @@
 #include <iostream>
 #include <ApeX/apex.h>
-#include "TriangleRenderer.h"
 
 
 
@@ -24,6 +23,8 @@ struct Player : Component
 
 };
 
+#undef main
+
 int main()
 {
 	std::shared_ptr<Core> core = Core::initialize();
@@ -32,9 +33,12 @@ int main()
 	ent->add_component<Player>();
 
 
+	ent->add_component<TriangleRenderer>();
+
 
 	core->start();
 
+	
 
 	std::cout << "test";
 

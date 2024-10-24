@@ -37,7 +37,7 @@ namespace apex
 		friend struct apex::Core; //friend allows for private functions to be accessed by core struct
 
 		void tick();
-		void display();
+		void render();
 
 		std::vector<std::shared_ptr<Component> > m_components;
 		bool m_alive;
