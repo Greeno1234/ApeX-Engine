@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Core.h"
 #include "Entity.h"
+#include "Window.h"
 
 namespace apex {
 
@@ -10,6 +11,7 @@ namespace apex {
 	{
 		std::shared_ptr<Core> rtn = std::make_shared<Core>();
 
+		rtn->m_window = std::make_shared<Window>();
 		rtn->m_self = rtn;
 		//rtn->m_nativeWindow = SDL_CreateWindow();
 
@@ -71,4 +73,8 @@ namespace apex {
 		m_running = false;
 	}
 
+	std::shared_ptr<Window> Core::window() const
+	{
+		return m_window;
+	}
 }

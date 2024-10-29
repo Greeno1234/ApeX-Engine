@@ -28,6 +28,12 @@ int main()
 	ent->add_component<Player>();
 
 
+<<<<<<< Updated upstream
+=======
+	ent->add_component<TriangleRenderer>();
+	ent->add_component<TriSpin>();
+
+>>>>>>> Stashed changes
 
 	core->start();
 

@@ -17,8 +17,23 @@ add_library(ApeX
 	src/ApeX/Entity.h
 	src/ApeX/Component.h
 	src/ApeX/Component.cpp
+<<<<<<< Updated upstream
 
 )
+=======
+	src/ApeX/TriangleRenderer.cpp
+    src/ApeX/TriangleRenderer.h
+    src/ApeX/TriSpin.h
+    src/ApeX/TriSpin.cpp
+src/ApeX/Window.cpp
+src/ApeX/Window.h
+
+)
+target_link_libraries(
+	ApeX SDL2 GLEW32 OpenGL32
+)
+
+>>>>>>> Stashed changes
 
 add_executable(demo
   src/demo/main.cpp
