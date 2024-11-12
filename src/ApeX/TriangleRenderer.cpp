@@ -1,39 +1,19 @@
 #include "TriangleRenderer.h"
+//#include "Window.h"
 
 namespace apex {
 	void TriangleRenderer::on_initialize()
 	{		
-		window = SDL_CreateWindow("OpenGL Demo", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
-
-
-		if (!SDL_GL_CreateContext(window))
-		{
-			throw std::exception();
-		}
-
-		if (glewInit() != GLEW_OK)
-		{
-			throw std::exception();
-		}
-
-		quit = false;
-		e = { 0 };
+		
 
 	}
 
-	void TriangleRenderer::on_render()
+	void TriangleRenderer::on_display()
 	{
 
-			while (SDL_PollEvent(&e)) //should be in core later
-			{
-				if (e.type == SDL_QUIT)
-				{
-					quit = true;
-				}
-			}
+
 			//draw stuff
-			glClearColor(0, 0, 0.5f, 1); //background colour
-			glClear(GL_COLOR_BUFFER_BIT);
+
 
 			//creates the points of the triangle
 			const GLfloat positions[] = {
@@ -179,7 +159,7 @@ namespace apex {
 			glBindVertexArray(0);
 			glUseProgram(0);
 
-			SDL_GL_SwapWindow(window);
+		
 
 			/////////////////////////////
 			//m_shader.set_mesh(m_mesh)//
