@@ -1,5 +1,7 @@
 #include "Window.h"
 
+#include <GL/glew.h>
+
 namespace apex
 {
 
@@ -8,15 +10,16 @@ namespace apex
 		int winw = 800;
 		int winh = 600;
 
-		//m_raw = SDL_CreateWindow("Engine Demo", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, winw, winh, SDL_WINDOW_RESIZABLE | SDL_WINDOW_REND);
+		m_raw = SDL_CreateWindow("Engine Demo", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, winw, winh, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
 
 		if (!m_raw)
 		{
 			throw std::exception("Failed to create window");
 		}
 
-		//m_context = SDL_Rend_CreateContext(m_raw);
 		m_context = SDL_GL_CreateContext(m_raw);
+
+		glewInit();
 
 	}
 

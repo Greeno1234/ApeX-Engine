@@ -3,6 +3,8 @@
 #include "Entity.h"
 #include "Window.h"
 
+#include <GL/glew.h>
+
 namespace apex {
 
 
@@ -39,33 +41,35 @@ namespace apex {
 	void Core::start()
 	{
 
-		//m_running = true;
-		//while m_running{.....}
-
-		for (size_t i = 0; i < 25; i++)
+		m_running = true;
+		while (m_running)
 		{
+			SDL_Event evt = {};
+
+			while (SDL_PollEvent(&evt))
+			{
+				if (evt.type == SDL_QUIT)
+				{
+					m_running = false;
+				}
+			}
+
 			for (size_t ei = 0; ei < m_entities.size(); ei++)
 			{
 				m_entities.at(ei)->tick();
 			}
-			std::cout << i << std::endl;
+
+			glClearColor(0, 0, 0.5f, 1); //background colour
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			for (size_t ei = 0; ei < m_entities.size(); ei++)
 			{
-				//if (!m_entities.alive())
-				//{
-				//
-				//}
+				m_entities.at(ei)->display();
 			}
 
-
-
-
-
-
-
-
+			SDL_GL_SwapWindow(m_window->m_raw);
 		}
+		
 	}
 
 	void Core::stop()

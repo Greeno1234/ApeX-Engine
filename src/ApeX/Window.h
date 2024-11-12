@@ -4,16 +4,16 @@
 
 namespace apex
 {
-
+	struct Core;
 	struct Window
 	{
 		Window();
 		~Window();
 
 	private:
-		SDL_Window* m_raw;
-		//SDL_RendContext m_context;
+		friend struct apex::Core;
 
+		SDL_Window* m_raw;
 		SDL_GLContext m_context;
 
 
