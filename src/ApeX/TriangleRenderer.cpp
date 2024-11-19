@@ -1,5 +1,4 @@
 #include "TriangleRenderer.h"
-//#include "Window.h"
 
 namespace apex {
 	void TriangleRenderer::on_initialize()

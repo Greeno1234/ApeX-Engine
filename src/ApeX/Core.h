@@ -1,11 +1,12 @@
 #include <memory>
 #include <vector>
+#include <string>
 
 namespace apex
 {
-
 	struct Entity;
 	struct Window;
+	struct Resources;
 
 	struct Core
 	{
@@ -15,14 +16,18 @@ namespace apex
 		void stop();
 		std::shared_ptr<Entity> add_entity();
 		std::shared_ptr<Window> window() const;
+		std::shared_ptr<Resources> resources() const;
 
 	private:
 
 		std::shared_ptr<Window> m_window;
+		std::shared_ptr<Resources> m_resources;
 		std::vector<std::shared_ptr<Entity> > m_entities;
 		bool m_running = false;
 		std::weak_ptr<Core> m_self;	
 		//SDL_Window* m_nativeWindow;
 	};
+
+	
 
 }

@@ -28,16 +28,41 @@ add_library(ApeX
     src/ApeX/TriSpin.cpp
 	src/ApeX/Window.cpp
 	src/ApeX/Window.h
+	src/ApeX/Resource.h
+	src/ApeX/Resources.h
+	src/ApeX/Texture.h
+	src/ApeX/Model.h
+
 
 )
 target_link_libraries(
-	ApeX SDL2 GLEW32 OpenGL32
+	ApeX rend
 )
+
+###########################################################################
+# rend
+###########################################################################
+
+add_library(rend
+  src/rend/Animation.cpp
+  src/rend/Buffer.cpp
+  src/rend/Debug.cpp
+  src/rend/Font.cpp
+  src/rend/Mesh.cpp
+  src/rend/Model.cpp
+  src/rend/ModelShader.cpp
+  src/rend/RenderTexture.cpp
+  src/rend/Shader.cpp
+  src/rend/TextShader.cpp
+  src/rend/Texture.cpp
+  src/rend/rendmath.cpp
+  src/rend/utils.cpp
+)
+target_link_libraries(rend SDL2 GLEW32 OpenGL32)
+
 
 
 add_executable(demo
   src/demo/main.cpp
-  src/demo/Employee.cpp
-  src/demo/Employee.h
 )
 target_link_libraries(demo ApeX)
