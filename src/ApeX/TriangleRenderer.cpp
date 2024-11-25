@@ -1,5 +1,9 @@
 #include "TriangleRenderer.h"
-//#include "Window.h"
+#include "Entity.h"
+#include "Transform.h"
+#include "glm/glm.hpp"
+
+
 
 namespace apex {
 	void TriangleRenderer::on_initialize()
@@ -11,8 +15,15 @@ namespace apex {
 	void TriangleRenderer::on_display()
 	{
 
+		
+		glm::mat4 model(1.0f);
+		//model = glm::translate(model, glm::vec3(0,0,-10));
+		model = entity()->get_component<Transform>()->model();
 
-			//draw stuff
+		//m_shader->uniform("u_Model", model);
+
+		
+		
 
 
 			//creates the points of the triangle

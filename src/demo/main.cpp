@@ -16,7 +16,6 @@ struct Player : Component
 		printf("Player::tick\n");
 	}
 
-
 };
 
 int main()
@@ -25,10 +24,15 @@ int main()
 
 
 	std::shared_ptr<Entity> ent = core->add_entity();
-	ent->add_component<Player>();
+	
+	//add a transform to this
+	ent->add_component<Transform>();
+	ent->add_component<Player>();  //find out what this does
 	ent->add_component<TriangleRenderer>();
 	//ent->add_component<TriSpin>();
-
+	// 
+	//core->resources()->load<Model>("models/curuthers/curuthers");
+	//core->resources()->load<Texture>("");
 
 	core->start();
 
