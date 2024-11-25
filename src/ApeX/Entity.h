@@ -10,12 +10,7 @@ namespace apex
 
 	struct Entity
 	{
-		/*
-		template <typename T>
-
-		std::shared_ptr<T> add_component();
-		*/
-
+	
 		void kill();
 
 
@@ -42,7 +37,7 @@ namespace apex
 				if (rtn) return rtn;
 			}
 
-			throw std::runtime_error("Failed to find component");
+			throw std::runtime_error("Failed to find component");///////////////////
 		}
 
 
