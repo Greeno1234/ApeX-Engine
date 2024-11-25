@@ -24,6 +24,7 @@ int main()
 
 
 	std::shared_ptr<Entity> ent = core->add_entity();
+	//add a transform to this
 	ent->add_component<Player>();  //find out what this does
 	ent->add_component<TriangleRenderer>();
 	//ent->add_component<TriSpin>();

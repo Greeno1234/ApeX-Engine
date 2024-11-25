@@ -2,6 +2,8 @@
 
 #include <memory>
 
+
+
 namespace apex
 {
 
@@ -11,7 +13,7 @@ namespace apex
 	struct Component
 	{
 		
-		
+		std::shared_ptr<Entity> entity();
 
 
 	private:
