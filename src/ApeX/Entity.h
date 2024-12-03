@@ -7,6 +7,7 @@ namespace apex
 
 	struct Core;
 	struct Component;
+	struct Transform;
 
 	struct Entity
 	{
@@ -40,7 +41,7 @@ namespace apex
 			throw std::runtime_error("Failed to find component");///////////////////
 		}
 
-
+		std::shared_ptr<Transform> get_transform();
 
 
 	private:
@@ -51,6 +52,7 @@ namespace apex
 		void display();
 
 		std::vector<std::shared_ptr<Component> > m_components;
+		std::weak_ptr<Transform> m_transform;
 		bool m_alive = false;
 		std::weak_ptr<Core> m_core;
 		std::weak_ptr<Entity> m_self;

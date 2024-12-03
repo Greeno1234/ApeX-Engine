@@ -45,4 +45,9 @@ namespace apex {
 			//m_components.at(ci)->kill();   /////////////////not working with entity::kill either
 		}
 	}
+
+	std::shared_ptr<Transform> Entity::get_transform()
+	{
+		return m_transform.lock();
+	}
 }

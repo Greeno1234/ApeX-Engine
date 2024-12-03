@@ -1,9 +1,14 @@
 #include "Transform.h"
-#include <glm/ext.hpp>
+#include <rend/rend.h>
 
 
 namespace apex
 {
+
+	void Transform::on_initialize()
+	{
+		m_scale = glm::vec3(1, 1, 1);
+	}
 	
 	glm::mat4 Transform::model()
 	{
@@ -16,6 +21,11 @@ namespace apex
 
 		return rtn;
 		
-	};
+	}
+
+	void Transform::setPosition(glm::vec3 pos)
+	{
+		m_position = pos;
+	}
 	
 }

@@ -16,7 +16,4 @@ namespace apex {
 	private:
 		std::shared_ptr<rend::Texture> m_texture;
 	};
-
-
-
 }

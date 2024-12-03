@@ -5,9 +5,7 @@
 #include "Component.h"
 #include "Transform.h"
 
-//<<<<<<< Updated upstream
 
-//=======
 #include "TriangleRenderer.h"
 #include "TriSpin.h"
-//>>>>>>> Stashed changes
+

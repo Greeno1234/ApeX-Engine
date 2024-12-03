@@ -22,6 +22,10 @@ namespace apex
 
 		std::shared_ptr<Window> m_window;
 		std::shared_ptr<Resources> m_resources;
+		////sub systems
+		// input
+		// audio
+
 		std::vector<std::shared_ptr<Entity> > m_entities;
 		bool m_running = false;
 		std::weak_ptr<Core> m_self;	

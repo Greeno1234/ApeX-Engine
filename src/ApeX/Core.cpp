@@ -2,8 +2,9 @@
 #include "Core.h"
 #include "Entity.h"
 #include "Window.h"
+#include "Transform.h"
 
-#include <GL/glew.h>
+#include <rend/rend.h>
 
 namespace apex {
 
@@ -32,6 +33,8 @@ namespace apex {
 
 		m_entities.push_back(rtn);
 
+		rtn->m_transform = rtn->add_component<Transform>();
+
 		//std::cout << rtn->m_core.lock().get() << std::endl;   ///idk what this does
 
 		return rtn;
@@ -59,15 +62,14 @@ namespace apex {
 				m_entities.at(ei)->tick();
 			}
 
-			glClearColor(0, 0, 0.5f, 1); //background colour
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			SDL_Rend_ClearWindow(m_window->m_raw);
 
 			for (size_t ei = 0; ei < m_entities.size(); ei++)
 			{
 				m_entities.at(ei)->display();
 			}
 
-			SDL_GL_SwapWindow(m_window->m_raw);
+			SDL_Rend_SwapWindow(m_window->m_raw);
 		}
 		
 	}
