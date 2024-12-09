@@ -14,6 +14,7 @@ struct Transform : Component
 
 
 	void setPosition(glm::vec3 pos);
+	void setScale(glm::vec3 scale);
 
 
 private:

@@ -27,5 +27,10 @@ namespace apex
 	{
 		m_position = pos;
 	}
+
+	void Transform::setScale(glm::vec3 scale)
+	{
+		m_scale = scale;
+	}
 	
 }

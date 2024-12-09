@@ -25,14 +25,15 @@ int main()
 {
 	std::shared_ptr<Core> core = Core::initialize();
 
-
 	std::shared_ptr<Entity> ent = core->add_entity();
 	
+
 	ent->add_component<Player>();  //has an initialise and tick function
 	ent->add_component<TriangleRenderer>();
 
-	//add set scale
-	ent->get_transform()->setPosition(glm::vec3(0, 0, -10));
+	// Transform
+	ent->get_transform()->setPosition(glm::vec3(0.5, 0, -2)); // sets position of entity
+	ent->get_transform()->setScale(glm::vec3(0.5, 0.5, 0.5)); // sets scale to half
 
 
 
