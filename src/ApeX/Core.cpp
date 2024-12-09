@@ -55,6 +55,35 @@ namespace apex {
 				{
 					m_running = false;
 				}
+				switch (evt.type)
+				{
+				case SDL_KEYDOWN:
+					switch (evt.key.keysym.sym)
+					{
+					case SDLK_UP:
+						//y += 0.1f;				
+						break;
+					case SDLK_DOWN:
+							//y -= 0.1f;
+						break;
+					case SDLK_LEFT:
+	
+						std::cout<< "left";
+
+						break;
+					case SDLK_RIGHT:
+						std::cout << "right";
+
+						break;
+					case SDLK_ESCAPE:
+						m_running = false;
+						break;
+					default:
+						break;
+					}
+
+				}
+				
 			}
 
 			for (size_t ei = 0; ei < m_entities.size(); ei++)
