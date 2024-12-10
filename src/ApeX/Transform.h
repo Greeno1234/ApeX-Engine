@@ -13,13 +13,15 @@ struct Transform : Component
 	glm::mat4 model(); //generates temporarily
 
 
-	void setPosition(glm::vec3 pos);
+	void setPosition(glm::vec3 position);
 	void setScale(glm::vec3 scale);
+	void setRotation(float angle, glm::vec3 axis);
 
 
 private:
 	glm::vec3 m_position;
-	glm::vec3 m_rotation;
+	float m_angle = 3.0f;
+	glm::vec3 m_axis = glm::vec3 {0,1,0};
 	glm::vec3 m_scale;
 
 };

@@ -18,6 +18,12 @@ namespace apex {
 	} 
 	*/
 
+	std::shared_ptr<Core> Entity::core()
+	{
+		return m_core.lock();
+	}
+
+
 	void Entity::tick()
 	{
 		for (size_t ci = 0; ci < m_components.size(); ci++)

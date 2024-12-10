@@ -31,6 +31,7 @@ add_library(ApeX
 	src/ApeX/Resource.h
 	src/ApeX/Resources.h
 	src/ApeX/Texture.h
+	src/ApeX/Texture.cpp
 	src/ApeX/Model.h
 	src/ApeX/Transform.h
 	src/ApeX/Transform.cpp

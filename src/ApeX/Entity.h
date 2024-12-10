@@ -43,7 +43,7 @@ namespace apex
 
 		std::shared_ptr<Transform> get_transform();
 
-
+		std::shared_ptr<Core> core();
 	private:
 
 		friend struct apex::Core; //friend allows for private functions to be accessed by core struct
