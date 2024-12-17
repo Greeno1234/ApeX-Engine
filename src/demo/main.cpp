@@ -38,7 +38,7 @@ int main()
 
 
 	std::shared_ptr<TriangleRenderer> tr = ent2->add_component<TriangleRenderer>();
-	tr->setTexture(core->resources()->load<Texture>("textures/brick.png"));
+	tr->setTexture(core->resources()->load<Texture>("textures/brick.png"));  //assuming this only works withpng
 	
 	//core->resources()->load<Texture>("../resources/textures/grass.png");
 

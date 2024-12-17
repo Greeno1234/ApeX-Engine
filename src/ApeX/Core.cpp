@@ -52,6 +52,7 @@ namespace apex {
 		float z = -2;
 		float angle = 0;
 		glm::vec3 axis = { 0,1,0 };
+
 		m_running = true;
 		while (m_running)
 		{
@@ -71,39 +72,38 @@ namespace apex {
 					case SDLK_UP:
 						y += 0.1f;
 						z -= 0.2f;
+
 						break;
 					case SDLK_DOWN:
-							y -= 0.1f;
-							z += 0.2f;
+						y -= 0.1f;
+						z += 0.2f;
 
 						break;
 					case SDLK_LEFT:
-	
 						std::cout<< "left";
 						x -= 0.2f;
 						
 						break;
 					case SDLK_RIGHT:
-
 						std::cout << "right";
 						x += 0.2f;
 					
 						break;
 
 					case SDLK_d:
-
 						std::cout << "d";
 						angle += 10;
+
 						break;
 					case SDLK_a:
-
 						std::cout << "a";
 						angle -= 10;
+
 						break;
 
 					case SDLK_ESCAPE:
 						stop();
-						//m_running = false;
+
 						break;
 					default:
 						break;

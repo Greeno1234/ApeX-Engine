@@ -35,6 +35,8 @@ add_library(ApeX
 	src/ApeX/Model.h
 	src/ApeX/Transform.h
 	src/ApeX/Transform.cpp
+	src/ApeX/Renderer.cpp
+   	src/ApeX/Renderer.h
 
 
 )
