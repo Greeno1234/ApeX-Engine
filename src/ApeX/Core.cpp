@@ -47,8 +47,12 @@ namespace apex {
 
 	void Core::start()
 	{
+
+
+
+		//////////////////////// CHANGE THIS TO GET POSITION OF OBJECT
 		float x = 0;
-		float y = 0;
+		float y = -1;
 		float z = -2;
 		float angle = 0;
 		glm::vec3 axis = { 0,1,0 };

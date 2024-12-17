@@ -24,8 +24,6 @@ add_library(ApeX
 	src/ApeX/Component.cpp
 	src/ApeX/TriangleRenderer.cpp
    	src/ApeX/TriangleRenderer.h
-   	src/ApeX/TriSpin.h
-    	src/ApeX/TriSpin.cpp
 	src/ApeX/Window.cpp
 	src/ApeX/Window.h
 	src/ApeX/Resource.h
@@ -33,11 +31,11 @@ add_library(ApeX
 	src/ApeX/Texture.h
 	src/ApeX/Texture.cpp
 	src/ApeX/Model.h
+	src/ApeX/Model.cpp
 	src/ApeX/Transform.h
 	src/ApeX/Transform.cpp
 	src/ApeX/Renderer.cpp
    	src/ApeX/Renderer.h
-
 
 )
 target_link_libraries(

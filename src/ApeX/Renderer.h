@@ -8,11 +8,13 @@ namespace apex
 {
 
 	struct Texture;
+	struct Model;
 
 	struct Renderer : Component
 	{
 
 		void setTexture(std::shared_ptr<Texture> texture);
+		void setModel(std::shared_ptr<Model> model);
 
 
 		void on_initialize(); //virtual functions within component
@@ -26,11 +28,12 @@ namespace apex
 		//turn these all into resources
 		//wrap within resource
 
+		std::shared_ptr<Model> m_model;
 		std::shared_ptr<rend::Mesh> m_mesh; //do the same
 		std::shared_ptr<Texture> m_texture;
 		std::shared_ptr<rend::Shader> m_shader;
-		//Mesh m_mesh;
-
+		std::shared_ptr<rend::ModelShader> m_mshader;
+		//audio
 
 		/*
 		difference is that mesh can be dynamically changed  ////////////////
