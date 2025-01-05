@@ -19,7 +19,7 @@
 namespace apex {
 
 
-void load_ogg(const std::string&, std::vector<unsigned char>&, ALenum&, ALsizei&); //?//////////////////
+void load_ogg(const std::string&, std::vector<unsigned char>&, ALenum&, ALsizei&); /// initialises the thing with default things
 
 int Audio::on_initialise()
 {
@@ -52,6 +52,12 @@ int Audio::on_initialise()
     alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f);
     //alListener3f(AL_VELOCITY, 0.0f, 0.0f, 0.0f);
 
+
+
+
+
+
+
     /*************************************************************************
      * Preparing buffer
      *************************************************************************/
@@ -67,10 +73,16 @@ int Audio::on_initialise()
     alBufferData(bufferId, format, &bufferData.at(0),
         static_cast<ALsizei>(bufferData.size()), freq);
 
+
+
+
+
+
+
     /*************************************************************************
      * Preparing sound source
      *************************************************************************/
-    ALuint sourceId = 0;
+    ALuint sourceId = 0;////
     alGenSources(1, &sourceId);
 
     alSourcei(sourceId, AL_BUFFER, bufferId);
@@ -78,10 +90,22 @@ int Audio::on_initialise()
     //alSourcef(sourceId, AL_PITCH, 10);
     //alSourcef(sourceId, AL_GAIN, vol);
 
+
+
+
+
+
     /*************************************************************************
      * Play audio
      *************************************************************************/
     alSourcePlay(sourceId);
+
+    //Play();
+
+
+
+
+
 
     /*************************************************************************
      * Tick
@@ -102,6 +126,12 @@ int Audio::on_initialise()
 #endif
     }
 
+
+
+
+
+
+
     /*************************************************************************
      * Cleanup
      *************************************************************************/
@@ -113,6 +143,19 @@ int Audio::on_initialise()
 
     return 0;
 }
+
+
+void Audio::Play()//
+{
+
+    /*************************************************************************
+     * Play audio
+     *************************************************************************/
+
+    //alSourcePlay(sourceId);
+}
+
+
 
 void load_ogg(const std::string& _path, std::vector<unsigned char>& _buffer,
     ALenum& _format, ALsizei& _freq)

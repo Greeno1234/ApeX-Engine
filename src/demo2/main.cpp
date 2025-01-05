@@ -58,7 +58,7 @@ int main()
 
 	
 	ent2->get_transform()->setPosition(glm::vec3(0.5f, -1, -3));
-	ent2->get_transform()->setScale(glm::vec3(0.5, 0.5, 0.5));
+	ent2->get_transform()->setScale(glm::vec3(0.2, 0.2, 0.2));
 
 
 	
@@ -68,6 +68,6 @@ int main()
 	//core->resources()->load<Texture>("");
 	
 	core->start();
-	//audio->on_initialise();
+	audio->on_initialise();
 	return(0);
 }

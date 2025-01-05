@@ -7,6 +7,7 @@ namespace apex
 	struct Entity;
 	struct Window;
 	struct Resources;
+	struct Audio;
 
 	struct Core
 	{
@@ -22,6 +23,8 @@ namespace apex
 
 		std::shared_ptr<Window> m_window;
 		std::shared_ptr<Resources> m_resources;
+
+		std::shared_ptr<Audio> m_audio;
 		////sub systems
 		// input
 		// audio

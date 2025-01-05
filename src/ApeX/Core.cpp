@@ -20,6 +20,7 @@ namespace apex {
 
 		rtn->m_window = std::make_shared<Window>();
 		rtn->m_resources = std::make_shared<Resources>();
+		//rtn->m_audio = std::make_shared<Audio>();
 		rtn->m_self = rtn;
 		//rtn->m_nativeWindow = SDL_CreateWindow();
 
@@ -36,7 +37,7 @@ namespace apex {
 		rtn->m_core = m_self;
 		rtn->m_self = rtn;
 
-		rtn->m_transform = rtn->add_component<Transform>();
+		rtn->m_transform = rtn->add_component<Transform>(); //every entity will have its own transform component
 
 		m_entities.push_back(rtn);
 		//std::cout << rtn->m_core.lock().get() << std::endl;   ///idk what this does
@@ -74,12 +75,12 @@ namespace apex {
 					switch (evt.key.keysym.sym)
 					{
 					case SDLK_UP:
-						y += 0.1f;
+						//y += 0.1f;
 						z -= 0.2f;
 
 						break;
 					case SDLK_DOWN:
-						y -= 0.1f;
+						//y -= 0.1f;
 						z += 0.2f;
 
 						break;
@@ -116,6 +117,7 @@ namespace apex {
 				}
 				m_entities[0]->get_transform()->setPosition(glm::vec3(x, y, z)); //player is entity 0
 				m_entities[0]->get_transform()->setRotation(angle, glm::vec3(0, 1, 0));
+				//m_entities[0]->get_audio()->Play();
 				
 			}
 

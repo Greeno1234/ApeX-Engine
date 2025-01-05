@@ -7,6 +7,10 @@ namespace apex
 		int on_initialise();
 
 
+		void Play();
+		
+	private:
+		
 		
 	};
 

@@ -71,3 +71,9 @@ add_executable(demo
   src/demo/main.cpp
 )
 target_link_libraries(demo ApeX)
+
+
+add_executable(demo2
+  src/demo2/main.cpp
+)
+target_link_libraries(demo2 ApeX)
