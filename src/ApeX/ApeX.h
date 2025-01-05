@@ -8,6 +8,7 @@
 #include "Resource.h"
 #include "Texture.h"
 #include "Model.h"
+#include "Audio.h"
 
 #include "Renderer.h"
 #include "TriangleRenderer.h"

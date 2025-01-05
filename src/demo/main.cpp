@@ -18,9 +18,6 @@ struct Player : Component
 
 		//printf("Player::tick\n");
 		//player input
-
-
-		
 	}
 
 };
@@ -38,17 +35,20 @@ int main()
 	
 
 	ent->add_component<Player>();  //has an initialise and tick function
-	//ent->add_component<TriangleRenderer>();
+
+
 	std::shared_ptr<Renderer> rend = ent->add_component<Renderer>();
 	rend->setModel(core->resources()->load<Model>("curuthers/curuthers"));
 
-	
+
+	std::shared_ptr<Audio> audio = ent2->add_component<Audio>();
 
 	std::shared_ptr<TriangleRenderer> tr = ent2->add_component<TriangleRenderer>();
+
 	tr->setTexture(core->resources()->load<Texture>("textures/brick"));  //assuming this only works withpng
 	
 
-
+	audio->on_initialise();
 	std::shared_ptr<Renderer> rend2 = ent2->add_component<Renderer>();
 	rend2->setModel(core->resources()->load<Model>("Barrel/Barrel"));
 

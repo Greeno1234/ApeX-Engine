@@ -33,25 +33,12 @@ namespace apex
 
 
 		/*
-		duplicate triangel renderer
-
-		rename it to renderer
 
 		difference is that mesh can be dynamically changed
 
 		do the same thing to mesh as has been done to texture
 
 		try to remove the rend:: starters 
-
-
-		add ".png" to textures ending
-		and .obj to meshes
-
-
-		poggers
-		
-		
-		
 		
 		*/
 	};

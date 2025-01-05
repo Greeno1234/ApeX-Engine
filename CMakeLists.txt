@@ -36,6 +36,8 @@ add_library(ApeX
 	src/ApeX/Transform.cpp
 	src/ApeX/Renderer.cpp
    	src/ApeX/Renderer.h
+	src/ApeX/Audio.h
+	src/ApeX/Audio.cpp
 
 )
 target_link_libraries(
@@ -61,7 +63,7 @@ add_library(rend
   src/rend/rendmath.cpp
   src/rend/utils.cpp
 )
-target_link_libraries(rend SDL2 GLEW32 OpenGL32)
+target_link_libraries(rend SDL2 GLEW32 OpenGL32 openal32)
 
 
 
