@@ -15,6 +15,7 @@ namespace apex
 		
 		void start();
 		void stop();
+
 		std::shared_ptr<Entity> add_entity();
 		std::shared_ptr<Window> window() const;
 		std::shared_ptr<Resources> resources() const;

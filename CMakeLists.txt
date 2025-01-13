@@ -38,7 +38,8 @@ add_library(ApeX
    	src/ApeX/Renderer.h
 	src/ApeX/Audio.h
 	src/ApeX/Audio.cpp
-
+	src/ApeX/Camera.h
+	src/ApeX/Camera.cpp
 )
 target_link_libraries(
 	ApeX rend

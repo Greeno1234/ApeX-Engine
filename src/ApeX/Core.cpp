@@ -18,9 +18,11 @@ namespace apex {
 	{
 		std::shared_ptr<Core> rtn = std::make_shared<Core>();
 
+		//rtn->m_audio = std::make_shared<Audio>();///////////////
+
 		rtn->m_window = std::make_shared<Window>();
 		rtn->m_resources = std::make_shared<Resources>();
-		//rtn->m_audio = std::make_shared<Audio>();
+
 		rtn->m_self = rtn;
 		//rtn->m_nativeWindow = SDL_CreateWindow();
 
@@ -74,33 +76,33 @@ namespace apex {
 				case SDL_KEYDOWN:
 					switch (evt.key.keysym.sym)
 					{
-					case SDLK_UP:
+					case SDLK_w:
 						//y += 0.1f;
 						z -= 0.2f;
 
 						break;
-					case SDLK_DOWN:
+					case SDLK_s:
 						//y -= 0.1f;
 						z += 0.2f;
 
 						break;
-					case SDLK_LEFT:
+					case SDLK_a:
 						std::cout<< "left";
 						x -= 0.2f;
 						
 						break;
-					case SDLK_RIGHT:
+					case SDLK_d:
 						std::cout << "right";
 						x += 0.2f;
 					
 						break;
 
-					case SDLK_d:
+					case SDLK_RIGHT:
 						std::cout << "d";
 						angle += 10;
 
 						break;
-					case SDLK_a:
+					case SDLK_LEFT:
 						std::cout << "a";
 						angle -= 10;
 
@@ -117,7 +119,10 @@ namespace apex {
 				}
 				m_entities[0]->get_transform()->setPosition(glm::vec3(x, y, z)); //player is entity 0
 				m_entities[0]->get_transform()->setRotation(angle, glm::vec3(0, 1, 0));
-				//m_entities[0]->get_audio()->Play();
+
+				//m_audio = m_entities[0]->get_component<Audio>();
+				
+				
 				
 			}
 

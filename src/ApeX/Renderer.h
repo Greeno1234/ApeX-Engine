@@ -33,7 +33,7 @@ namespace apex
 		std::shared_ptr<Texture> m_texture;
 		std::shared_ptr<rend::Shader> m_shader;
 		std::shared_ptr<rend::ModelShader> m_mshader;
-		//audio
+		//audio////why is this here, do i put audio here ?????
 
 		/*
 		difference is that mesh can be dynamically changed  ////////////////

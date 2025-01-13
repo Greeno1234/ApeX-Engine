@@ -5,6 +5,7 @@
 namespace apex
 {
 	struct Core;
+
 	struct Window
 	{
 		Window();
