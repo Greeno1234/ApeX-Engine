@@ -38,7 +38,7 @@ int main()
 
 
 	std::shared_ptr<Renderer> rend = player->add_component<Renderer>();
-	rend->setModel(core->resources()->load<Model>("curuthers/curuthers")); //cat player
+	rend->setModel(core->resources()->load<Model>("Barrel/Barrel")); //barrel player
 
 
 	std::shared_ptr<Audio> audio = ent2->add_component<Audio>();
@@ -50,7 +50,7 @@ int main()
 
 	
 	std::shared_ptr<Renderer> rend2 = ent2->add_component<Renderer>();
-	rend2->setModel(core->resources()->load<Model>("Barrel/Barrel"));
+	rend2->setModel(core->resources()->load<Model>("curuthers/curuthers"));
 
 	// Transform
 	//ent->get_transform()->setPosition(glm::vec3(0.5, 0, -3)); // sets position of entity
