@@ -27,6 +27,9 @@ namespace apex {
 		//rtn->m_nativeWindow = SDL_CreateWindow();
 
 
+
+		//add audio here and add a destructor afterwards
+
 		return rtn;
 	}
 
@@ -50,13 +53,13 @@ namespace apex {
 
 	void Core::start()
 	{
-
-
-
+		glm::vec3 pos = m_entities[0]->get_transform()->getPosition();
 		//////////////////////// CHANGE THIS TO GET POSITION OF OBJECT
-		float x = 0;
-		float y = -1;
-		float z = -2;
+		
+		float x = pos.x;
+		float y = pos.y;
+		float z = pos.z;
+
 		float angle = 0;
 		glm::vec3 axis = { 0,1,0 };
 
@@ -73,7 +76,9 @@ namespace apex {
 				}
 				switch (evt.type)
 				{
+				//case SDL_KEYUP:  
 				case SDL_KEYDOWN:
+					//m_keyboard->m_keys.pushback(evt.key.keysym.sym)
 					switch (evt.key.keysym.sym)
 					{
 					case SDLK_w:
@@ -89,7 +94,8 @@ namespace apex {
 					case SDLK_a:
 						std::cout<< "left";
 						x -= 0.2f;
-						
+						//add to array of keyboard input
+
 						break;
 					case SDLK_d:
 						std::cout << "right";
@@ -117,12 +123,9 @@ namespace apex {
 					}
 
 				}
+				
 				m_entities[0]->get_transform()->setPosition(glm::vec3(x, y, z)); //player is entity 0
-				m_entities[0]->get_transform()->setRotation(angle, glm::vec3(0, 1, 0));
-
-				//m_audio = m_entities[0]->get_component<Audio>();
-				
-				
+				m_entities[0]->get_transform()->setRotation(angle, glm::vec3(0, 1, 0)); ///< sets rotation on angle specified by 1
 				
 			}
 

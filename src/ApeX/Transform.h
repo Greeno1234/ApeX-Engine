@@ -12,6 +12,7 @@ struct Transform : Component
 
 	glm::mat4 model(); //generates temporarily
 
+	glm::vec3 getPosition() { return m_position; };
 
 	void setPosition(glm::vec3 position);
 	void setScale(glm::vec3 scale);

@@ -8,6 +8,10 @@ namespace apex
 		
 
 		void Play();
+
+		void on_tick();
+
+		void on_quit();
 		
 	private:
 

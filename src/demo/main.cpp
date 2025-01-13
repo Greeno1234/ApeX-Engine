@@ -24,13 +24,14 @@ struct Player : Component
 
 int main()
 {
-
+	std::shared_ptr<Core> core = Core::initialize(); ///< initializes Core (which does.......)
 	//textures automatically include the "resources/" + ".png" file path
 	//models automatically include the "resources/" + ".obj" file path
-	std::shared_ptr<Core> core = Core::initialize();
 
-	/////////////////////     player       //////////////////////
-	std::shared_ptr<Entity> player = core->add_entity();
+
+
+	///////////////////////////////////     Player       //////////////////////////////////
+	std::shared_ptr<Entity> player = core->add_entity(); ///< adds a player entity to core
 	player->add_component<Player>();  //has an initialise and tick function
 
 
@@ -38,28 +39,36 @@ int main()
 	rend->setModel(core->resources()->load<Model>("curuthers/curuthers")); //cat player
 
 	std::shared_ptr<Audio> audio = player->add_component<Audio>();
-
+	audio->on_initialise();
+	audio->Play();
 
 	player->get_transform()->setScale(glm::vec3(0.3, 0.3, 0.3));
+	player->get_transform()->setPosition(glm::vec3(0, -1.25, -3));
+
+
+	
+	/////////////////////////////////////     Barrels     //////////////////////////////////////////
+	std::shared_ptr<Entity> barrel = core->add_entity();
+	std::shared_ptr<Entity> barrel2 = core->add_entity();
+	//std::shared_ptr<TriangleRenderer> tr = barrel->add_component<TriangleRenderer>();
+
+	//tr->setTexture(core->resources()->load<Texture>("textures/brick"));  //assuming this only works withpng
+	std::shared_ptr<Renderer> barrelModel = barrel->add_component<Renderer>(); // can one renderer be used for multiple things or do i have to add a renderer to each entity but save the model????
+	barrelModel->setModel(core->resources()->load<Model>("Barrel/Barrel"));
+
+	barrel->get_transform()->setPosition(glm::vec3(0.5f, -2, -6));
+	barrel->get_transform()->setScale(glm::vec3(0.5, 0.5, 0.5));
+
+	std::shared_ptr<Renderer> barrelModel2 = barrel2->add_component<Renderer>();
+	barrelModel2->setModel(core->resources()->load<Model>("Barrel/Barrel"));
+	barrel2->get_transform()->setPosition(glm::vec3(0.5f, -2, -10));
 
 
 
-	//////////////////////     Barrel     /////////////////////////////
-	std::shared_ptr<Entity> ent2 = core->add_entity();
-
-	std::shared_ptr<TriangleRenderer> tr = ent2->add_component<TriangleRenderer>();
-
-	tr->setTexture(core->resources()->load<Texture>("textures/brick"));  //assuming this only works withpng
 
 
-	std::shared_ptr<Renderer> rend2 = ent2->add_component<Renderer>();
-	rend2->setModel(core->resources()->load<Model>("Barrel/Barrel"));
 
-	ent2->get_transform()->setPosition(glm::vec3(0.5f, -1, -3));
-	ent2->get_transform()->setScale(glm::vec3(0.5, 0.5, 0.5));
-
-
-	//////////////////     Floor     //////////////////////////////
+	/////////////////////////////////////     Floor     /////////////////////////////////////
 	std::shared_ptr<Entity> floor = core->add_entity();
 	
 	floor->add_component<TriangleRenderer>();
@@ -75,6 +84,6 @@ int main()
 	
 	
 	core->start();
-	audio->on_initialise();
+	
 	return(0);
 }

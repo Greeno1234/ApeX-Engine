@@ -51,14 +51,38 @@ int Audio::on_initialise()
     alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f);
     //alListener3f(AL_VELOCITY, 0.0f, 0.0f, 0.0f);
 
+    //Play();
+
+
+
+
+    //put this in core 
+
+
+
+    alcMakeContextCurrent(NULL);
+    alcDestroyContext(context);
+    alcCloseDevice(device);
+
+    return 0;
+}
+
+
+void Audio::Play()//
+{
+
     /*************************************************************************
-     * Preparing buffer
+     * Buffer
      *************************************************************************/
+
+    //alSourcePlay(sourceId);
+
+
     ALenum format = 0;
     ALsizei freq = 0;
     std::vector<unsigned char> bufferData;
     //load_ogg("../dixie_horn.ogg", bufferData, format, freq);
-    load_ogg("../resources/fnaf_honk.ogg", bufferData, format, freq);
+    load_ogg("../resources/fnaf_honk.ogg", bufferData, format, freq); //load as resource
 
     ALuint bufferId = 0;
     alGenBuffers(1, &bufferId);
@@ -86,19 +110,35 @@ int Audio::on_initialise()
      * Play audio
      *************************************************************************/
     alSourcePlay(sourceId);
+    std::cout << "audio playing";
+    //on_tick();
 
-    //Play();
 
 
+    /*************************************************************************
+ * Cleanup
+ *************************************************************************/
+    alDeleteSources(1, &sourceId);
+    alDeleteBuffers(1, &bufferId); 
+
+}
+
+
+
+
+void Audio::on_tick()
+{
 
     /*************************************************************************
      * Tick
      *************************************************************************/
 
+
+    ALuint source = 0;
     while (true)
     {
         int state = 0;
-        alGetSourcei(sourceId, AL_SOURCE_STATE, &state);
+        alGetSourcei(source, AL_SOURCE_STATE, &state);
         if (state != AL_PLAYING) break;
 
         //alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f);
@@ -110,31 +150,17 @@ int Audio::on_initialise()
 #endif
     }
 
-
-
-
-    /*************************************************************************
-     * Cleanup
-     *************************************************************************/
-    alDeleteSources(1, &sourceId);
-    alDeleteBuffers(1, &bufferId);
-    alcMakeContextCurrent(NULL);
-    alcDestroyContext(context);
-    alcCloseDevice(device);
-
-    return 0;
 }
 
 
-void Audio::Play()//
+
+
+void Audio::on_quit()
 {
 
-    /*************************************************************************
-     * Play audio
-     *************************************************************************/
-
-    //alSourcePlay(sourceId);
 }
+
+
 
 
 

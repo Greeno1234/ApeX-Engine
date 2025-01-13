@@ -42,10 +42,6 @@ namespace apex
 
 		try to remove the rend:: starters   (in the shared pointers)
 
-
-		add ".png" to textures ending
-		and .obj to meshes
-
 		*/
 	};
 
