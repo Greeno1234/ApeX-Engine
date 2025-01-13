@@ -56,8 +56,8 @@ namespace apex {
 	{
 		return m_transform.lock();
 	}
-	std::shared_ptr<Audio> Entity::get_audio()//
+	std::shared_ptr<AudioSource> Entity::get_audio()//
 	{
-		return m_audio.lock();
+		return m_audioSource.lock();
 	}
 }

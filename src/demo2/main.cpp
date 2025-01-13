@@ -29,6 +29,10 @@ int main()
 	//models automatically include the "resources/" + ".obj" file path
 	std::shared_ptr<Core> core = Core::initialize();
 
+
+	std::shared_ptr<Model> mBarrel = core->resources()->load<Model>("Barrel/Barrel");
+
+
 	std::shared_ptr<Entity> player = core->add_entity();
 
 	std::shared_ptr<Entity> ent2 = core->add_entity();
@@ -38,10 +42,8 @@ int main()
 
 
 	std::shared_ptr<Renderer> rend = player->add_component<Renderer>();
-	rend->setModel(core->resources()->load<Model>("Barrel/Barrel")); //barrel player
+	rend->setModel(mBarrel); //barrel player
 
-
-	std::shared_ptr<Audio> audio = ent2->add_component<Audio>();
 
 	std::shared_ptr<TriangleRenderer> tr = ent2->add_component<TriangleRenderer>();
 
@@ -50,7 +52,7 @@ int main()
 
 	
 	std::shared_ptr<Renderer> rend2 = ent2->add_component<Renderer>();
-	rend2->setModel(core->resources()->load<Model>("curuthers/curuthers"));
+	rend2->setModel(mBarrel);
 
 	// Transform
 	//ent->get_transform()->setPosition(glm::vec3(0.5, 0, -3)); // sets position of entity
@@ -68,6 +70,6 @@ int main()
 	//core->resources()->load<Texture>("");
 	
 	core->start();
-	audio->on_initialise();
+
 	return(0);
 }

@@ -8,7 +8,7 @@ namespace apex
 	struct Core;
 	struct Component;
 	struct Transform;
-	struct Audio; ///
+	struct AudioSource; ///
 
 	struct Entity
 	{
@@ -43,7 +43,7 @@ namespace apex
 		}
 
 		std::shared_ptr<Transform> get_transform();
-		std::shared_ptr<Audio> get_audio();////
+		std::shared_ptr<AudioSource> get_audio();////
 
 		std::shared_ptr<Core> core();
 	private:
@@ -55,7 +55,7 @@ namespace apex
 
 		std::vector<std::shared_ptr<Component> > m_components;
 		std::weak_ptr<Transform> m_transform;
-		std::weak_ptr<Audio> m_audio;///
+		std::weak_ptr<AudioSource> m_audioSource;///
 		bool m_alive = false;
 		std::weak_ptr<Core> m_core;
 		std::weak_ptr<Entity> m_self;

@@ -47,7 +47,6 @@ namespace apex {
 		
 		model = entity()->get_transform()->model();
 
-
 		m_mshader->model(*m_model->m_model);
 		m_mshader->lighting(false);
 		m_mshader->projection(glm::perspective(45.0f, 1.0f, 0.1f, 100.0f));

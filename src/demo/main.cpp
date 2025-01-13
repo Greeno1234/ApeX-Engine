@@ -29,18 +29,32 @@ int main()
 	//models automatically include the "resources/" + ".obj" file path
 
 
+	//Models
+	std::shared_ptr<Model> mCat = core->resources()->load<Model>("curuthers/curuthers");
+	std::shared_ptr<Model> mBarrel = core->resources()->load<Model>("Barrel/Barrel");
 
-	///////////////////////////////////     Player       //////////////////////////////////
+	//Textures
+	std::shared_ptr<Texture> tBrick = core->resources()->load<Texture>("textures/brick");
+
+	//Audio
+	std::shared_ptr<Audio> aHonk = core->resources()->load<Audio>("fnaf_honk");
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////     Player       ////////////////////////////////////////////
 	std::shared_ptr<Entity> player = core->add_entity(); ///< adds a player entity to core
 	player->add_component<Player>();  //has an initialise and tick function
 
 
-	std::shared_ptr<Renderer> rend = player->add_component<Renderer>();
-	rend->setModel(core->resources()->load<Model>("curuthers/curuthers")); //cat player
+	std::shared_ptr<AudioSource> as = player->add_component<AudioSource>();
+	as->setAudio(aHonk); ///< Set audio to honk
 
-	std::shared_ptr<Audio> audio = player->add_component<Audio>();
-	audio->on_initialise();
-	audio->Play();
+	as->Play(); ///
+
+	std::shared_ptr<Renderer> rend = player->add_component<Renderer>();
+	rend->setModel(mCat); //cat player
+
 
 	player->get_transform()->setScale(glm::vec3(0.3, 0.3, 0.3));
 	player->get_transform()->setPosition(glm::vec3(0, -1.25, -3));
@@ -50,22 +64,25 @@ int main()
 	/////////////////////////////////////     Barrels     //////////////////////////////////////////
 	std::shared_ptr<Entity> barrel = core->add_entity();
 	std::shared_ptr<Entity> barrel2 = core->add_entity();
-	//std::shared_ptr<TriangleRenderer> tr = barrel->add_component<TriangleRenderer>();
-
-	//tr->setTexture(core->resources()->load<Texture>("textures/brick"));  //assuming this only works withpng
+	
 	std::shared_ptr<Renderer> barrelModel = barrel->add_component<Renderer>(); // can one renderer be used for multiple things or do i have to add a renderer to each entity but save the model????
-	barrelModel->setModel(core->resources()->load<Model>("Barrel/Barrel"));
+	barrelModel->setModel(mBarrel);
 
 	barrel->get_transform()->setPosition(glm::vec3(0.5f, -2, -6));
 	barrel->get_transform()->setScale(glm::vec3(0.5, 0.5, 0.5));
 
 	std::shared_ptr<Renderer> barrelModel2 = barrel2->add_component<Renderer>();
-	barrelModel2->setModel(core->resources()->load<Model>("Barrel/Barrel"));
+	barrelModel2->setModel(mBarrel);
 	barrel2->get_transform()->setPosition(glm::vec3(0.5f, -2, -10));
 
+	///////////////////////Triangle////////////////////////////////////
+	std::shared_ptr<Entity> triangle = core->add_entity();
+	std::shared_ptr<TriangleRenderer> tr = triangle->add_component<TriangleRenderer>();
+	tr->setTexture(tBrick);
 
 
-
+	triangle->get_transform()->setPosition(glm::vec3(0, 4, -10));
+	triangle->get_transform()->setScale(glm::vec3(2, 2, 2));
 
 
 	/////////////////////////////////////     Floor     /////////////////////////////////////
@@ -78,10 +95,6 @@ int main()
 	floor->get_transform()->setRotation(-90, glm::vec3(1,0,0));
 	
 	//ent2->kill();
-	
-	
-	//core->resources()->load<Texture>("");
-	
 	
 	core->start();
 	

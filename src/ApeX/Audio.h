@@ -1,21 +1,24 @@
-#include "Component.h"
+#include "Resource.h"
+#include <AL/al.h>
+#include <AL/alc.h>
+
+
 
 namespace apex
 {
-	struct Audio : Component
+	struct AudioSource;
+	struct Resource;
+
+	struct Audio : Resource
 	{
-		int on_initialise();
-		
 
-		void Play();
-
-		void on_tick();
-
-		void on_quit();
-		
+		void onLoad();
+	
 	private:
+		friend struct apex::AudioSource;
 
-		
+		ALuint bufferId = 0;
+
 	};
 
 }

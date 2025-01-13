@@ -15,7 +15,7 @@ namespace apex
 		
 		void start();
 		void stop();
-
+		Core::~Core();
 		std::shared_ptr<Entity> add_entity();
 		std::shared_ptr<Window> window() const;
 		std::shared_ptr<Resources> resources() const;
@@ -25,7 +25,6 @@ namespace apex
 		std::shared_ptr<Window> m_window;
 		std::shared_ptr<Resources> m_resources;
 
-		std::shared_ptr<Audio> m_audio;
 		////sub systems
 		// input
 		// audio

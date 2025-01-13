@@ -3,11 +3,18 @@
 #include "Entity.h"
 #include "Window.h"
 #include "Transform.h"
+#include "AudioSource.h"
 #include "Resources.h"
 
+#include <AL/al.h>
+#include <AL/alc.h>
 #include <rend/rend.h>
 
+
+
+
 namespace apex {
+
 
 	std::shared_ptr<Resources> Core::resources() const
 	{
@@ -24,11 +31,29 @@ namespace apex {
 		rtn->m_resources = std::make_shared<Resources>();
 
 		rtn->m_self = rtn;
-		//rtn->m_nativeWindow = SDL_CreateWindow();
 
+		//////////////// Audio ////////////////
+		ALCdevice* device = alcOpenDevice(NULL); ///< Playback device
+		if (!device)
+		{
+			throw std::runtime_error("Failed to open audio device");
+		}
 
+		ALCcontext* context = alcCreateContext(device, NULL); ///< context of device (find out why this is important)
+		if (!context)
+		{
+			alcCloseDevice(device);
+			throw std::runtime_error("Failed to create audio context");
+		}
+		if (!alcMakeContextCurrent(context)) ///<checks if new context is current
+		{
+			alcDestroyContext(context); ///< destroys current device context
+			alcCloseDevice(device);
+			throw std::runtime_error("Failed to make context current");
+		}
+		alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f);
+		//alListener3f(AL_VELOCITY, 0.0f, 0.0f, 0.0f);
 
-		//add audio here and add a destructor afterwards
 
 		return rtn;
 	}
@@ -84,7 +109,7 @@ namespace apex {
 					case SDLK_w:
 						//y += 0.1f;
 						z -= 0.2f;
-
+						
 						break;
 					case SDLK_s:
 						//y -= 0.1f;
@@ -126,7 +151,7 @@ namespace apex {
 				
 				m_entities[0]->get_transform()->setPosition(glm::vec3(x, y, z)); //player is entity 0
 				m_entities[0]->get_transform()->setRotation(angle, glm::vec3(0, 1, 0)); ///< sets rotation on angle specified by 1
-				
+				//m_entities[0]->get_audio()->Play();
 			}
 
 			for (size_t ei = 0; ei < m_entities.size(); ei++)
@@ -150,6 +175,14 @@ namespace apex {
 	{
 		m_running = false;
 	}
+
+	Core::~Core() ///< destructor
+	{
+		alcMakeContextCurrent(NULL);
+		//alcDestroyContext(context);
+		//alcCloseDevice(device);
+	}
+
 
 	std::shared_ptr<Window> Core::window() const
 	{

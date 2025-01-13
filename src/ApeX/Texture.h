@@ -3,7 +3,7 @@
 #include "Resource.h"
 
 namespace apex {
-	struct Resource;
+	//struct Resource;
 	struct TriangleRenderer;
 	struct Renderer;
 

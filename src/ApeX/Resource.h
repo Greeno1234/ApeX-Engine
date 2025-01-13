@@ -21,7 +21,7 @@ namespace apex {
 		friend struct apex::Resources;
 		std::string m_path;
 
-		void load() // calls onLoad
+		void load() // calls onLoad for resources
 		{
 			onLoad();
 		}
