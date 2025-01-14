@@ -3,7 +3,8 @@
 #include "Entity.h"
 #include "Window.h"
 #include "Transform.h"
-#include "AudioSource.h"
+#include "Keyboard.h"
+//#include "AudioSource.h"
 #include "Resources.h"
 
 #include <AL/al.h>
@@ -21,18 +22,23 @@ namespace apex {
 		return m_resources;
 	}
 
+	std::shared_ptr<Keyboard> Core::getKeyboard()
+	{
+		return m_keyboard;
+	}
+
+
 	std::shared_ptr<Core> Core::initialize()
 	{
 		std::shared_ptr<Core> rtn = std::make_shared<Core>();
 
-		//rtn->m_audio = std::make_shared<Audio>();///////////////
-
 		rtn->m_window = std::make_shared<Window>();
 		rtn->m_resources = std::make_shared<Resources>();
+		rtn->m_keyboard = std::make_shared<Keyboard>();///
 
 		rtn->m_self = rtn;
 
-		//////////////// Audio ////////////////
+		////////////////     Audio Initialisation    ////////////////
 		ALCdevice* device = alcOpenDevice(NULL); ///< Playback device
 		if (!device)
 		{
@@ -45,13 +51,13 @@ namespace apex {
 			alcCloseDevice(device);
 			throw std::runtime_error("Failed to create audio context");
 		}
-		if (!alcMakeContextCurrent(context)) ///<checks if new context is current
+		if (!alcMakeContextCurrent(context)) ///< checks if new context is current
 		{
 			alcDestroyContext(context); ///< destroys current device context
 			alcCloseDevice(device);
 			throw std::runtime_error("Failed to make context current");
 		}
-		alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f);
+		alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f); ///< Listener (make this camera)
 		//alListener3f(AL_VELOCITY, 0.0f, 0.0f, 0.0f);
 
 
@@ -101,9 +107,11 @@ namespace apex {
 				}
 				switch (evt.type)
 				{
-				//case SDL_KEYUP:  
+				
 				case SDL_KEYDOWN:
-					//m_keyboard->m_keys.pushback(evt.key.keysym.sym)
+
+					m_keyboard->m_keys.push_back(evt.key.keysym.sym);///
+					/*
 					switch (evt.key.keysym.sym)
 					{
 					case SDLK_w:
@@ -143,9 +151,29 @@ namespace apex {
 						stop();
 
 						break;
-					default:
-						break;
+
+					
+
+
+					
 					}
+					*/
+					break;
+				case SDL_KEYUP:
+					//clear the keys
+					//iterate through
+					for (size_t i = 0; i < m_keyboard->m_keys.size(); ++i)
+					{
+						if (m_keyboard->m_keys[i] == evt.key.keysym.sym)
+						{
+							m_keyboard->m_keys.erase(m_keyboard->m_keys.begin() + i);
+							--i;
+						}
+					}
+					break;
+
+				default:
+					break;
 
 				}
 				

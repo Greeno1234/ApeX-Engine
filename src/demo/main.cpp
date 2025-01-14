@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ApeX/apex.h>
 
+
 using namespace apex;
 
 struct Player : Component
@@ -10,14 +11,36 @@ struct Player : Component
 	void on_initialize() //virtual functions?? within component
 	{
 		printf("Player::initialize\n");	
+		
+
+
 	}
-	int i = 0;
 	void on_tick()
 	{
+		std::shared_ptr<Keyboard> keyboard = entity()->core()->getKeyboard();
+		glm::vec3 pos = this->entity()->get_transform()->getPosition();
 		//implement delta time and only show tick for frame of 60
-
 		//printf("Player::tick\n");
 		//player input
+		/*
+		if (getcore()->getkeyboard()->iskeydown(sdlk_up))
+		{
+			transform()->move(0, 0.10f, 0);
+		}
+		*/
+		if (keyboard->isKeyDown(SDLK_UP))
+		{
+			std::cout << "up";
+			//move character
+			pos.y += 0.5f;
+		}
+		if (keyboard->isKeyDown(SDLK_DOWN))
+		{
+			std::cout << "down";
+			//move character
+			pos.y -= 0.5f;
+		}
+		this->entity()->get_transform()->setPosition(pos);
 	}
 
 };
@@ -38,6 +61,9 @@ int main()
 
 	//Audio
 	std::shared_ptr<Audio> aHonk = core->resources()->load<Audio>("fnaf_honk");
+	std::shared_ptr<Audio> aHorn = core->resources()->load<Audio>("dixie_horn");
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -54,7 +80,6 @@ int main()
 
 	std::shared_ptr<Renderer> rend = player->add_component<Renderer>();
 	rend->setModel(mCat); //cat player
-
 
 	player->get_transform()->setScale(glm::vec3(0.3, 0.3, 0.3));
 	player->get_transform()->setPosition(glm::vec3(0, -1.25, -3));

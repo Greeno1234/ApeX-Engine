@@ -42,6 +42,10 @@ add_library(ApeX
 	src/ApeX/Camera.cpp
 	src/ApeX/AudioSource.h
 	src/ApeX/AudioSource.cpp
+	src/ApeX/Keyboard.h
+	src/ApeX/Keyboard.cpp
+	src/ApeX/BoxCollider.h
+	src/ApeX/BoxCollider.cpp
 )
 target_link_libraries(
 	ApeX rend

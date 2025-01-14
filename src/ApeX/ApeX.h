@@ -8,6 +8,7 @@
 #include "AudioSource.h"
 #include "Renderer.h"
 #include "TriangleRenderer.h"
+#include "Keyboard.h"
 
 
 #include "Resources.h"
