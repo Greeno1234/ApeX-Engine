@@ -7,40 +7,58 @@ using namespace apex;
 struct Player : Component
 {
 	
+	glm::vec3 pos;
+	float angle = 0;
 
 	void on_initialize() //virtual functions?? within component
 	{
 		printf("Player::initialize\n");	
 		
-
-
+		pos = glm::vec3(0, -1.25, -3); ///<starting postition of player
+		
 	}
 	void on_tick()
 	{
 		std::shared_ptr<Keyboard> keyboard = entity()->core()->getKeyboard();
-		glm::vec3 pos = this->entity()->get_transform()->getPosition();
+		
 		//implement delta time and only show tick for frame of 60
-		//printf("Player::tick\n");
-		//player input
-		/*
-		if (getcore()->getkeyboard()->iskeydown(sdlk_up))
-		{
-			transform()->move(0, 0.10f, 0);
-		}
-		*/
+
+
 		if (keyboard->isKeyDown(SDLK_UP))
 		{
 			std::cout << "up";
 			//move character
-			pos.y += 0.5f;
+			pos.z -= 0.01f;
 		}
-		if (keyboard->isKeyDown(SDLK_DOWN))
+		else if (keyboard->isKeyDown(SDLK_DOWN))
 		{
 			std::cout << "down";
 			//move character
-			pos.y -= 0.5f;
+			pos.z += 0.01f;
 		}
-		this->entity()->get_transform()->setPosition(pos);
+		else if (keyboard->isKeyDown(SDLK_RIGHT))
+		{
+			std::cout << "right";
+			//move character
+			pos.x += 0.01f;
+		}
+		else if (keyboard->isKeyDown(SDLK_LEFT))
+		{
+			std::cout << "left";
+			//move character
+			pos.x -= 0.01f;
+		}
+		else if (keyboard->isKeyDown(SDLK_a))
+		{
+			angle -= 10;
+		}
+		else if (keyboard->isKeyDown(SDLK_d))
+		{
+			angle += 10;
+		}
+		entity()->get_transform()->setPosition(pos);
+		entity()->get_transform()->setRotation(angle, glm::vec3(0, 1, 0));
+	
 	}
 
 };

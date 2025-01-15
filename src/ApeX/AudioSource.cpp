@@ -35,7 +35,7 @@ void AudioSource::Play()//
 
     alSourcei(sourceId, AL_BUFFER, m_audio->bufferId);
     alSource3f(sourceId, AL_POSITION, 0.0f, 0.0f, 0.0f); // replace with models location
-    alSourcef(sourceId, AL_PITCH, 0.5); // lowers pitch and makes it sound like a cat lol
+    alSourcef(sourceId, AL_PITCH, 1); // lowers pitch and makes it sound like a cat lol
     //alSourcef(sourceId, AL_GAIN, vol); // raises or lowers volume
 
     /*************************************************************************

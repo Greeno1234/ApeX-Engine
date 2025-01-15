@@ -84,16 +84,8 @@ namespace apex {
 
 	void Core::start()
 	{
-		glm::vec3 pos = m_entities[0]->get_transform()->getPosition();
-		//////////////////////// CHANGE THIS TO GET POSITION OF OBJECT
-		
-		float x = pos.x;
-		float y = pos.y;
-		float z = pos.z;
-
 		float angle = 0;
 		glm::vec3 axis = { 0,1,0 };
-
 		m_running = true;
 		while (m_running)
 		{
@@ -109,59 +101,10 @@ namespace apex {
 				{
 				
 				case SDL_KEYDOWN:
-
-					m_keyboard->m_keys.push_back(evt.key.keysym.sym);///
-					/*
-					switch (evt.key.keysym.sym)
-					{
-					case SDLK_w:
-						//y += 0.1f;
-						z -= 0.2f;
-						
-						break;
-					case SDLK_s:
-						//y -= 0.1f;
-						z += 0.2f;
-
-						break;
-					case SDLK_a:
-						std::cout<< "left";
-						x -= 0.2f;
-						//add to array of keyboard input
-
-						break;
-					case SDLK_d:
-						std::cout << "right";
-						x += 0.2f;
-					
-						break;
-
-					case SDLK_RIGHT:
-						std::cout << "d";
-						angle += 10;
-
-						break;
-					case SDLK_LEFT:
-						std::cout << "a";
-						angle -= 10;
-
-						break;
-
-					case SDLK_ESCAPE:
-						stop();
-
-						break;
-
-					
-
-
-					
-					}
-					*/
+					m_keyboard->m_keys.push_back(evt.key.keysym.sym);///< gets key pressed and stores it in the m_keys vector
 					break;
 				case SDL_KEYUP:
 					//clear the keys
-					//iterate through
 					for (size_t i = 0; i < m_keyboard->m_keys.size(); ++i)
 					{
 						if (m_keyboard->m_keys[i] == evt.key.keysym.sym)
@@ -177,8 +120,8 @@ namespace apex {
 
 				}
 				
-				m_entities[0]->get_transform()->setPosition(glm::vec3(x, y, z)); //player is entity 0
-				m_entities[0]->get_transform()->setRotation(angle, glm::vec3(0, 1, 0)); ///< sets rotation on angle specified by 1
+				//m_entities[0]->get_transform()->setPosition(glm::vec3(x, y, z)); //player is entity 0
+				//m_entities[0]->get_transform()->setRotation(angle, glm::vec3(0, 1, 0)); ///< sets rotation on angle specified by 1
 				//m_entities[0]->get_audio()->Play();
 			}
 
