@@ -21,6 +21,4 @@ namespace apex
 		Window(const Window& _copy);
 		Window& operator=(const Window& asign);
 	};
-
-
 }

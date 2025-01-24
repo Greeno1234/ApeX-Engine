@@ -4,7 +4,7 @@
 #include "Window.h"
 #include "Transform.h"
 #include "Keyboard.h"
-//#include "AudioSource.h"
+#include "Camera.h"
 #include "Resources.h"
 
 #include <AL/al.h>
@@ -26,7 +26,10 @@ namespace apex {
 	{
 		return m_keyboard;
 	}
-
+	std::shared_ptr<Camera> Core::getCamera()
+	{
+		return m_camera;
+	}
 
 	std::shared_ptr<Core> Core::initialize()
 	{
@@ -34,7 +37,8 @@ namespace apex {
 
 		rtn->m_window = std::make_shared<Window>();
 		rtn->m_resources = std::make_shared<Resources>();
-		rtn->m_keyboard = std::make_shared<Keyboard>();///
+		rtn->m_keyboard = std::make_shared<Keyboard>();
+		rtn->m_camera = std::make_shared<Camera>();
 
 		rtn->m_self = rtn;
 
@@ -82,10 +86,8 @@ namespace apex {
 	}
 
 
-	void Core::start()
+	void Core::start() // main game loop
 	{
-		float angle = 0;
-		glm::vec3 axis = { 0,1,0 };
 		m_running = true;
 		while (m_running)
 		{
@@ -114,15 +116,10 @@ namespace apex {
 						}
 					}
 					break;
-
 				default:
 					break;
 
 				}
-				
-				//m_entities[0]->get_transform()->setPosition(glm::vec3(x, y, z)); //player is entity 0
-				//m_entities[0]->get_transform()->setRotation(angle, glm::vec3(0, 1, 0)); ///< sets rotation on angle specified by 1
-				//m_entities[0]->get_audio()->Play();
 			}
 
 			for (size_t ei = 0; ei < m_entities.size(); ei++)

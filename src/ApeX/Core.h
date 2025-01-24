@@ -8,6 +8,7 @@ namespace apex
 	struct Window;
 	struct Resources;
 	struct Keyboard;
+	struct Camera;
 	//struct Audio;
 
 	struct Core
@@ -21,13 +22,14 @@ namespace apex
 		std::shared_ptr<Window> window() const;
 		std::shared_ptr<Resources> resources() const;
 		std::shared_ptr<Keyboard> getKeyboard();
+		std::shared_ptr<Camera> getCamera();
 
 	private:
 
 		std::shared_ptr<Window> m_window;
 		std::shared_ptr<Resources> m_resources;
 		std::shared_ptr<Keyboard> m_keyboard;
-		//mkeyboard
+		std::shared_ptr<Camera> m_camera; 
 		////sub systems
 		// input
 		// audio

@@ -28,7 +28,6 @@ namespace apex
 		
 		void tick();
 		void display();
-		//int m_dummy;
 	};
 
 }

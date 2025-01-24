@@ -115,12 +115,13 @@ void Shader::load(int _type)
       "                                                     " \
       "uniform mat4 u_Projection;                           " \
       "uniform mat4 u_Model;                                " \
+      "uniform mat4 u_View;                                 " \
       "                                                     " \
       "varying vec2 v_TexCoord;                             " \
       "                                                     " \
       "void main()                                          " \
       "{                                                    " \
-      "  gl_Position = u_Projection * u_Model * a_Position; " \
+      "  gl_Position = u_Projection * u_View * u_Model * a_Position; " \
       "  v_TexCoord = a_TexCoord;                           " \
       "}                                                    " \
       "\n#endif\n                                           " \

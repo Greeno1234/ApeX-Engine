@@ -5,11 +5,11 @@
 #include "Core.h"
 #include "Resources.h"
 #include "Model.h"
+#include "Camera.h"
 
 
-
+#include <iostream>
 namespace apex {
-
 
 	void Renderer::setTexture(std::shared_ptr<Texture> texture)
 	{
@@ -20,21 +20,16 @@ namespace apex {
 		m_model = model;
 	}
 
-
-
 	void Renderer::on_initialize()
 	{
 		//m_shader = std::make_shared<rend::Shader>(rend::TEXTURE_SHADER); // create a shader
 
 		m_mshader = std::make_shared<rend::ModelShader>();
-
-		//m_mesh = std::make_shared<rend::Mesh>(rend::QUAD_MESH); // create a triangle mesh    /// this will be dynamically changeable
-
-		//m_texture = entity()->core()->resources()->load<Texture>("textures/grass");
-		
+		m_camera = entity()->core()->getCamera();
+		//m_mesh = std::make_shared<rend::Mesh>(rend::QUAD_MESH);/// this will be dynamically changeable
 	}
 
-	void Renderer::on_display()
+	void Renderer::on_display() //on a tick event
 	{
 		/*if (!m_texture)
 		{
@@ -42,11 +37,10 @@ namespace apex {
 		}*/
 
 
-
 		glm::mat4 model(1.0f);
-		
 		model = entity()->get_transform()->model();
 
+		m_mshader->view(m_camera->getView());
 		m_mshader->model(*m_model->m_model);
 		m_mshader->lighting(false);
 		m_mshader->projection(glm::perspective(45.0f, 1.0f, 0.1f, 100.0f));

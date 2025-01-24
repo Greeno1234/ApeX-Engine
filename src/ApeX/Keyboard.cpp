@@ -18,5 +18,15 @@ namespace apex
 
 	}
 
+	int Keyboard::whichKey()
+	{
+
+		for (int i = 0; i < m_keys.size(); i++)
+		{
+			return m_keys[0];
+		}
+		
+	}
+
 
 }

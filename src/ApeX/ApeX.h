@@ -9,6 +9,7 @@
 #include "Renderer.h"
 #include "TriangleRenderer.h"
 #include "Keyboard.h"
+#include "Camera.h"
 
 
 #include "Resources.h"

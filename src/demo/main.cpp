@@ -4,68 +4,83 @@
 
 using namespace apex;
 
+std::shared_ptr<Core> core = Core::initialize(); ///<initialise core (receently moved here(maybe needs to move back to main but idk))
+
+
 struct Player : Component
 {
 	
 	glm::vec3 pos;
-	float angle = 0;
+	float angle = 180;
+	//float speed;
+	//        = 
+	float distance = 0.025f;
+	//        /
+	//float time;
 
 	void on_initialize() //virtual functions?? within component
 	{
 		printf("Player::initialize\n");	
 		
-		pos = glm::vec3(0, -1.25, -3); ///<starting postition of player
-		
+		pos = glm::vec3(0, -1.25, -3); ///< Starting postition of player
 	}
 	void on_tick()
 	{
 		std::shared_ptr<Keyboard> keyboard = entity()->core()->getKeyboard();
-		
+		std::shared_ptr<Camera> camera = entity()->core()->getCamera();
+
+		std::shared_ptr<AudioSource> as = entity()->get_component<AudioSource>();
 		//implement delta time and only show tick for frame of 60
+		
+		//try switch statement
 
 
-		if (keyboard->isKeyDown(SDLK_UP))
+		switch (keyboard->whichKey()) //< checks which keys exist in the "m_keys" int vector
 		{
-			std::cout << "up";
-			//move character
-			pos.z -= 0.01f;
+		case (SDLK_w):
+			pos.z -= distance;
+				break;
+
+		case (SDLK_a):
+			pos.x -= distance;
+			break;
+
+		case (SDLK_s):
+			pos.z += distance;
+			break;
+
+		case (SDLK_d):
+			pos.x += distance;
+			break;
+
+		case (SDLK_LEFT):
+			angle -= 5;
+			break;
+
+		case (SDLK_RIGHT):
+			angle += 5;
+			break;
+
+		case (SDLK_SPACE):
+			as->Play();
+			break;
+
+		default:
+			break;
 		}
-		else if (keyboard->isKeyDown(SDLK_DOWN))
-		{
-			std::cout << "down";
-			//move character
-			pos.z += 0.01f;
-		}
-		else if (keyboard->isKeyDown(SDLK_RIGHT))
-		{
-			std::cout << "right";
-			//move character
-			pos.x += 0.01f;
-		}
-		else if (keyboard->isKeyDown(SDLK_LEFT))
-		{
-			std::cout << "left";
-			//move character
-			pos.x -= 0.01f;
-		}
-		else if (keyboard->isKeyDown(SDLK_a))
-		{
-			angle -= 10;
-		}
-		else if (keyboard->isKeyDown(SDLK_d))
-		{
-			angle += 10;
-		}
-		entity()->get_transform()->setPosition(pos);
+
 		entity()->get_transform()->setRotation(angle, glm::vec3(0, 1, 0));
-	
+		entity()->get_transform()->setPosition(pos);
+
+	    camera->setPosition(glm::vec3 (pos.x,pos.y + 1,pos.z + 3));//set to pos
+		
 	}
 
 };
 
 int main()
 {
-	std::shared_ptr<Core> core = Core::initialize(); ///< initializes Core (which does.......)
+	 ///< initializes Core (which does.......)
 	//textures automatically include the "resources/" + ".png" file path
 	//models automatically include the "resources/" + ".obj" file path
 
@@ -78,6 +93,7 @@ int main()
 	std::shared_ptr<Texture> tBrick = core->resources()->load<Texture>("textures/brick");
 
 	//Audio
+
 	std::shared_ptr<Audio> aHonk = core->resources()->load<Audio>("fnaf_honk");
 	std::shared_ptr<Audio> aHorn = core->resources()->load<Audio>("dixie_horn");
 
@@ -88,13 +104,11 @@ int main()
 
 ///////////////////////////////////     Player       ////////////////////////////////////////////
 	std::shared_ptr<Entity> player = core->add_entity(); ///< adds a player entity to core
-	player->add_component<Player>();  //has an initialise and tick function
+	
 
 
 	std::shared_ptr<AudioSource> as = player->add_component<AudioSource>();
 	as->setAudio(aHonk); ///< Set audio to honk
-
-	as->Play(); ///
 
 	std::shared_ptr<Renderer> rend = player->add_component<Renderer>();
 	rend->setModel(mCat); //cat player
@@ -102,8 +116,12 @@ int main()
 	player->get_transform()->setScale(glm::vec3(0.3, 0.3, 0.3));
 	player->get_transform()->setPosition(glm::vec3(0, -1.25, -3));
 
-
+	player->add_component<Player>();  //has an initialise and tick function
 	
+
+
+
+
 	/////////////////////////////////////     Barrels     //////////////////////////////////////////
 	std::shared_ptr<Entity> barrel = core->add_entity();
 	std::shared_ptr<Entity> barrel2 = core->add_entity();
@@ -118,14 +136,20 @@ int main()
 	barrelModel2->setModel(mBarrel);
 	barrel2->get_transform()->setPosition(glm::vec3(0.5f, -2, -10));
 
+
+
+
 	///////////////////////Triangle////////////////////////////////////
 	std::shared_ptr<Entity> triangle = core->add_entity();
 	std::shared_ptr<TriangleRenderer> tr = triangle->add_component<TriangleRenderer>();
 	tr->setTexture(tBrick);
 
 
-	triangle->get_transform()->setPosition(glm::vec3(0, 4, -10));
-	triangle->get_transform()->setScale(glm::vec3(2, 2, 2));
+	triangle->get_transform()->setPosition(glm::vec3(0, -1, -20));
+	triangle->get_transform()->setScale(glm::vec3(5, 5, 5));
+
+
+
 
 
 	/////////////////////////////////////     Floor     /////////////////////////////////////
@@ -133,12 +157,15 @@ int main()
 	
 	floor->add_component<TriangleRenderer>();
 
-	floor->get_transform()->setPosition(glm::vec3(0, -2, -6));
-	floor->get_transform()->setScale(glm::vec3(5, 5, 2));
+	floor->get_transform()->setPosition(glm::vec3(0, -2, -7));
+	floor->get_transform()->setScale(glm::vec3(50, 50, 50));
 	floor->get_transform()->setRotation(-90, glm::vec3(1,0,0));
+	/////////////////////////////////////////////////////////////////////////////////////
 	
-	//ent2->kill();
-	
+
+
+
+
 	core->start();
 	
 	return(0);

@@ -21,7 +21,7 @@ struct Transform : Component
 
 private:
 	glm::vec3 m_position;
-	float m_angle = 3.0f;
+	float m_angle = 0.0f;
 	glm::vec3 m_axis = glm::vec3 {0,1,0};
 	glm::vec3 m_scale;
 

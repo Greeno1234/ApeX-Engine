@@ -9,6 +9,7 @@ namespace apex
 
 		bool isKeyDown(int key);
 
+		int whichKey();
 
 	private:
 		friend struct apex::Core;

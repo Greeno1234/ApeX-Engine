@@ -8,6 +8,8 @@ namespace apex
 {
 
 	struct Texture;
+	struct Camera;
+
 
 	struct TriangleRenderer : Component
 	{
@@ -29,6 +31,9 @@ namespace apex
 		std::shared_ptr<rend::Mesh> m_mesh; //do the same
 		std::shared_ptr<Texture> m_texture;
 		std::shared_ptr<rend::Shader> m_shader;
+
+		std::shared_ptr<Camera> m_camera;
+
 		//Mesh m_mesh;
 
 

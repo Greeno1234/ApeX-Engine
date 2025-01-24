@@ -23,7 +23,7 @@ namespace apex
 
 	Window::~Window()
 	{
-		//SDL_Rend_DeleteContext(m_context);
+		SDL_Rend_DeleteContext(m_context);
 		SDL_DestroyWindow(m_raw);
 		SDL_Quit();
 	}

@@ -1,42 +1,47 @@
-/*
-
-#ifndef CAMERA_CLASS_H
-#define CAMERA_CLASS_H
-
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <glm/gtx/rotate_vector.hpp>
-#include <glm/gtx/vector_angle.hpp>
-
-#include "shaderClass.h"
-
-class Camera
+#include <rend/rend.h>  ///might change this to just use necessary includes
+//#include "ApeX/ApeX.h"
+#include "Component.h"
+namespace apex
 {
-public:
-	glm::vec3 Position;
-	glm::vec3 Orientation = glm::vec3(0.0f, -0.2f, -1.0f);
-	glm::vec3 Up = glm::vec3(0.0f, 1.0f, 0.0f);
-	glm::mat4 cameraMatrix = glm::mat4(1.0f);
+
+	struct Camera : Component
+	{
+		/*
+		glm::vec3 cameraPosition = glm::vec3(0.0f, 0.0f, -3.0f);
+		glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+		glm::vec3 cameraDirection = glm::normalize(cameraPosition - cameraDirection); // Z-axis vector
+	
+		glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);  
+		glm::vec3 cameraRight = glm::normalize(glm::cross(up, cameraDirection)); // X-axis vector
+
+		glm::vec3 cameraUp = glm::cross(cameraDirection, cameraRight);  // Y-axis vector
+
+		// all of these vectors for the view/camera space
+
+		*/
+	
 
 
-	bool firstClick = true;
+		//glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 6.0f);
+		glm::vec3 cameraPos;
 
-	int width;
-	int height;
-
-	float speed = 0.01f;
-	float sensitivity = 50.0f;
+		glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+		glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
 
-	Camera(int width, int height, glm::vec3 position);
+		void setPosition(glm::vec3 pos)
+		{
+			cameraPos = pos;
+		}
 
-	void updateMatrix(float FOVdeg, float nearPlane, float farPlane);
-	void Matrix(Shader& shader, const char* uniform);
-	void Inputs(GLFWwindow* window);
-};
-#endif
+		glm::mat4 getView()
+		{
+			return glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+		}
 
-*/
+	};
+
+
+
+
+}
