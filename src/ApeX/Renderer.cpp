@@ -7,8 +7,8 @@
 #include "Model.h"
 #include "Camera.h"
 
-
 #include <iostream>
+
 namespace apex {
 
 	void Renderer::setTexture(std::shared_ptr<Texture> texture)
@@ -26,10 +26,9 @@ namespace apex {
 
 		m_mshader = std::make_shared<rend::ModelShader>();
 		m_camera = entity()->core()->getCamera();
-		//m_mesh = std::make_shared<rend::Mesh>(rend::QUAD_MESH);/// this will be dynamically changeable
 	}
 
-	void Renderer::on_display() //on a tick event
+	void Renderer::on_display()
 	{
 		/*if (!m_texture)
 		{
@@ -51,7 +50,4 @@ namespace apex {
 		m_mshader->render();
 
 	}
-
-
-
 }

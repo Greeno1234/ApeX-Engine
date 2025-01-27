@@ -1,19 +1,22 @@
-//#include <rend/rend.h>
-#include "ApeX/apex.h" //find a way that doest just include the master header
-//#include "Component.h"
-//#include "Entity.h"
+#include <rend/rend.h>
+#include "Component.h"
+
 
 namespace apex
 {
-
 	struct BoxCollider : Component
 	{
-		bool colliding(const BoxCollider& _other);
+		bool colliding(BoxCollider& _other);
+
+		void setSize(glm::vec3 size)
+		{
+			m_size = size;
+		}
+		
 
 	private:
 		glm::vec3 m_size;
 		glm::vec3 m_offset;
-
 	};
 
 

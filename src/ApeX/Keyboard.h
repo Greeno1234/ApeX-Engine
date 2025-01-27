@@ -16,6 +16,4 @@ namespace apex
 		std::vector<int> m_keys;
 
 	};
-
-
 }

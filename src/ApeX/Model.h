@@ -5,7 +5,6 @@ namespace apex {
 	struct Resource;
 	struct Renderer;
 
-
 	struct Model : Resource
 	{
 		void onLoad();

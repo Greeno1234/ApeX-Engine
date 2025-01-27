@@ -1,23 +1,30 @@
 #include "BoxCollider.h"
+#include "Core.h"
+#include "Entity.h"
+#include "Transform.h"
 
-
+#include <iostream>
 
 namespace apex 
 {
-	bool BoxCollider::colliding(const BoxCollider& _other)
+
+
+	bool BoxCollider::colliding(BoxCollider& _other)
 	{
+
+		
 		glm::vec3 a = entity()->get_transform()->getPosition();
-		//glm::vec3 b = _other.entity()->get_transform()->getPosition();
-		glm::vec3 b = entity()->get_transform()->getPosition();
+		glm::vec3 b = _other.entity()->get_transform()->getPosition();
 		glm::vec3 ahs = m_size / 2.0f;
 		glm::vec3 bhs = _other.m_size / 2.0f;
-
+		std::cout << "test";
 		// x
 		if (a.x > b.x)
 		{
 			if (b.x + bhs.x < a.x - ahs.x)
 			{
 				return false;
+				std::cout << "test";
 			}
 		}
 		else
@@ -57,7 +64,7 @@ namespace apex
 				return false;
 			}
 		}
-
+		
 		return true;
 	}
 

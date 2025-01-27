@@ -4,7 +4,6 @@
 
 namespace apex
 {
-
 	Window::Window()
 	{
 		int winw = 800;
@@ -27,5 +26,4 @@ namespace apex
 		SDL_DestroyWindow(m_raw);
 		SDL_Quit();
 	}
-
 }

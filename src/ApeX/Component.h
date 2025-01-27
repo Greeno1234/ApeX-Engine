@@ -6,8 +6,6 @@
 
 namespace apex
 {
-
-
 	struct Entity;
 
 	struct Component
@@ -22,7 +20,6 @@ namespace apex
 		virtual void on_initialize();
 		virtual void on_tick();
 		virtual void on_display();
-
 
 		std::weak_ptr<Entity> m_entity;
 		

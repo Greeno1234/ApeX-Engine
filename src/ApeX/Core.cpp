@@ -11,9 +11,6 @@
 #include <AL/alc.h>
 #include <rend/rend.h>
 
-
-
-
 namespace apex {
 
 
@@ -49,7 +46,7 @@ namespace apex {
 			throw std::runtime_error("Failed to open audio device");
 		}
 
-		ALCcontext* context = alcCreateContext(device, NULL); ///< context of device (find out why this is important)
+		ALCcontext* context = alcCreateContext(device, NULL); ///< context of device
 		if (!context)
 		{
 			alcCloseDevice(device);
@@ -61,8 +58,9 @@ namespace apex {
 			alcCloseDevice(device);
 			throw std::runtime_error("Failed to make context current");
 		}
-		alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f); ///< Listener (make this camera)
-		//alListener3f(AL_VELOCITY, 0.0f, 0.0f, 0.0f);
+		
+		alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f); ///< Listener
+		alListener3f(AL_VELOCITY, 0.0f, 0.0f, 0.0f);
 
 
 		return rtn;
@@ -80,7 +78,7 @@ namespace apex {
 		rtn->m_transform = rtn->add_component<Transform>(); //every entity will have its own transform component
 
 		m_entities.push_back(rtn);
-		//std::cout << rtn->m_core.lock().get() << std::endl;   ///idk what this does
+		//std::cout << rtn->m_core.lock().get() << std::endl; 
 
 		return rtn;
 	}

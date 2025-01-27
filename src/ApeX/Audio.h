@@ -2,8 +2,6 @@
 #include <AL/al.h>
 #include <AL/alc.h>
 
-
-
 namespace apex
 {
 	struct AudioSource;
@@ -13,7 +11,7 @@ namespace apex
 	{
 
 		void onLoad();
-	
+
 	private:
 		friend struct apex::AudioSource;
 

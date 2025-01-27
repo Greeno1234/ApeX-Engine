@@ -1,5 +1,3 @@
-//#include <GL/glew.h>
-//#include <string>
 #include "Resource.h"
 
 namespace apex {

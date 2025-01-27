@@ -4,25 +4,30 @@
 
 using namespace apex;
 
-std::shared_ptr<Core> core = Core::initialize(); ///<initialise core (receently moved here(maybe needs to move back to main but idk))
+std::shared_ptr<Core> core = Core::initialize(); ///< initializes Core
 
 
 struct Player : Component
 {
-	
+	int tick = SDL_GetTicks();
+	int lastTick = tick;
 	glm::vec3 pos;
-	float angle = 180;
+	float angle = -90;
+	float pitch = 0;
 	//float speed;
 	//        = 
-	float distance = 0.025f;
+	float distance = 0.05f;
 	//        /
 	//float time;
-
-	void on_initialize() //virtual functions?? within component
+	bool firstPersonMode = true;
+	bool delay = false;
+	
+	void on_initialize()
 	{
 		printf("Player::initialize\n");	
 		
 		pos = glm::vec3(0, -1.25, -3); ///< Starting postition of player
+
 	}
 	void on_tick()
 	{
@@ -31,56 +36,117 @@ struct Player : Component
 
 		std::shared_ptr<AudioSource> as = entity()->get_component<AudioSource>();
 		//implement delta time and only show tick for frame of 60
-		
-		//try switch statement
+	
+
+		glm::vec3 direction = camera->getDirection();
+		glm::vec3 dirRight = glm::normalize(glm::cross(direction, glm::vec3(0, 1, 0)));
 
 
 		switch (keyboard->whichKey()) //< checks which keys exist in the "m_keys" int vector
 		{
 		case (SDLK_w):
-			pos.z -= distance;
-				break;
+			
+			pos += distance * direction;
+			break;
 
 		case (SDLK_a):
-			pos.x -= distance;
+			//pos.x -= distance;
+			pos -= distance * dirRight;
 			break;
 
 		case (SDLK_s):
-			pos.z += distance;
+			pos -= distance * direction;
 			break;
 
 		case (SDLK_d):
-			pos.x += distance;
+			pos += distance * dirRight;
 			break;
 
 		case (SDLK_LEFT):
-			angle -= 5;
+			angle -= 2;
 			break;
 
 		case (SDLK_RIGHT):
-			angle += 5;
+			angle += 2;
+			break;
+		case (SDLK_UP):
+			pitch -= 2;
+			break;
+		case (SDLK_DOWN):
+			pitch += 2;
 			break;
 
 		case (SDLK_SPACE):
-			as->Play();
-			break;
 
+			if (delay == false) ///< checks if a delay is activated
+			{
+				as->Play(); 
+				delay = true;///< set a delay before allowing interaction
+			}
+			break;
+		case (SDLK_p):
+			if (delay == false)
+			{
+				if (firstPersonMode == true)
+				{
+					firstPersonMode = false;
+				}
+				else
+				{
+					firstPersonMode = true;
+				}
+				delay = true;
+			}
+			
+			
+			break;
 		default:
 			break;
 		}
 
-		entity()->get_transform()->setRotation(angle, glm::vec3(0, 1, 0));
+		pos.y = -1.25; //keeps player on ground
+		entity()->get_transform()->setRotation(-angle +90, glm::vec3(0, 1, 0));
 		entity()->get_transform()->setPosition(pos);
 
-	    camera->setPosition(glm::vec3 (pos.x,pos.y + 1,pos.z + 3));//set to pos
+
+		// Camera
+		if (firstPersonMode == true)
+		{
+			camera->setPosition(pos + glm::vec3(0, 1, 0));// First person camera
+			// Constrains the pitch to stop it from repeating in circles
+			if (pitch > 89.0f)
+				pitch = 89.0f;
+			if (pitch < -89.0f)
+				pitch = -89.0f;
+			camera->setPitch(-pitch);
+		}
+		else // third person
+		{
+			camera->setPosition(pos + (glm::vec3(2, 4, 2) * -direction));// Third person camera
+			if (pitch > -20.0f)
+				pitch = -20.0f;
+			if (pitch < -89.0f)
+				pitch = -89.0f;
+			camera->setPitch(pitch);
+		}
+		//camera->setTarget(pos);
+		camera->setYaw(angle);
 		
+		tick = SDL_GetTicks();
+		if (tick - lastTick >= 300)
+		{
+			lastTick = tick;
+			//std::cout << tick - lastTick << std::endl;
+			std::cout << "tick" << std::endl;
+			delay = false; //reset the delay for button presses
+		}
 	}
 
 };
 
 int main()
 {
-	 ///< initializes Core (which does.......)
+	 
 	//textures automatically include the "resources/" + ".png" file path
 	//models automatically include the "resources/" + ".obj" file path
 
@@ -88,9 +154,11 @@ int main()
 	//Models
 	std::shared_ptr<Model> mCat = core->resources()->load<Model>("curuthers/curuthers");
 	std::shared_ptr<Model> mBarrel = core->resources()->load<Model>("Barrel/Barrel");
+	std::shared_ptr<Model> mCar = core->resources()->load<Model>("Car/l200");
 
 	//Textures
 	std::shared_ptr<Texture> tBrick = core->resources()->load<Texture>("textures/brick");
+	std::shared_ptr<Texture> tControls = core->resources()->load<Texture>("textures/controls");
 
 	//Audio
 
@@ -118,7 +186,9 @@ int main()
 
 	player->add_component<Player>();  //has an initialise and tick function
 	
-
+	std::shared_ptr<BoxCollider> bc1 = player->add_component<BoxCollider>();
+	bc1->setSize(glm::vec3(1, 1, 1));
+	player->add_component<RigidBody>();
 
 
 
@@ -126,7 +196,7 @@ int main()
 	std::shared_ptr<Entity> barrel = core->add_entity();
 	std::shared_ptr<Entity> barrel2 = core->add_entity();
 	
-	std::shared_ptr<Renderer> barrelModel = barrel->add_component<Renderer>(); // can one renderer be used for multiple things or do i have to add a renderer to each entity but save the model????
+	std::shared_ptr<Renderer> barrelModel = barrel->add_component<Renderer>();
 	barrelModel->setModel(mBarrel);
 
 	barrel->get_transform()->setPosition(glm::vec3(0.5f, -2, -6));
@@ -137,17 +207,56 @@ int main()
 	barrel2->get_transform()->setPosition(glm::vec3(0.5f, -2, -10));
 
 
+	//////////////////////////////     Car       /////////////////////////////////
 
+	std::shared_ptr<Entity> car = core->add_entity();
+	std::shared_ptr<Renderer> carModel = car->add_component<Renderer>();
+	carModel->setModel(mCar);
+
+	car->get_transform()->setPosition(glm::vec3(0, -2, -20));
+	car->get_transform()->setScale(glm::vec3(3, 3, 3));
+	car->get_transform()->setRotation(75, glm::vec3(0, 1, 0));
 
 	///////////////////////Triangle////////////////////////////////////
-	std::shared_ptr<Entity> triangle = core->add_entity();
-	std::shared_ptr<TriangleRenderer> tr = triangle->add_component<TriangleRenderer>();
-	tr->setTexture(tBrick);
+	std::shared_ptr<Entity> controls = core->add_entity();
+	std::shared_ptr<TriangleRenderer> tr = controls->add_component<TriangleRenderer>();  //triangle rendererr now renders squares instead of traingles
+
+	tr->setTexture(tControls);
+	controls->get_transform()->setScale(glm::vec3(3, 3, 1));
+	controls->get_transform()->setPosition(glm::vec3(0, 2, -12));
+	
+
+	///////////////////////wall////////////////////////////////////
+	std::shared_ptr<Entity> wall = core->add_entity();
+	std::shared_ptr<TriangleRenderer> trw = wall->add_component<TriangleRenderer>();
+
+	trw->setTexture(tBrick);
+	wall->get_transform()->setScale(glm::vec3(10, 5, 1));
+	wall->get_transform()->setPosition(glm::vec3(4, -1, -7));
+	wall->get_transform()->setRotation(90 ,glm::vec3(0,1,0));
+
+	///////////////////////wall2////////////////////////////////////
+	std::shared_ptr<Entity> wall2 = core->add_entity();
+	std::shared_ptr<TriangleRenderer> trw2 = wall2->add_component<TriangleRenderer>();  
+
+	trw2->setTexture(tBrick);
+	wall2->get_transform()->setScale(glm::vec3(10, 5, 1));
+	wall2->get_transform()->setPosition(glm::vec3(-4, -1, -7));
+	wall2->get_transform()->setRotation(90, glm::vec3(0, 1, 0));
+
+	///////////////////////wall3////////////////////////////////////
+	std::shared_ptr<Entity> wall3 = core->add_entity();
+	std::shared_ptr<TriangleRenderer> trw3 = wall3->add_component<TriangleRenderer>(); 
+
+	trw3->setTexture(tBrick);
+	wall3->get_transform()->setScale(glm::vec3(10, 5, 1));
+	wall3->get_transform()->setPosition(glm::vec3(4, -1, -7));
+	wall3->get_transform()->setRotation(90, glm::vec3(0, 1, 0));
 
 
-	triangle->get_transform()->setPosition(glm::vec3(0, -1, -20));
-	triangle->get_transform()->setScale(glm::vec3(5, 5, 5));
-
+	std::shared_ptr<BoxCollider> bc2 = wall->add_component<BoxCollider>();
+	bc2->setSize(glm::vec3(1,1,1));
+	wall->add_component<RigidBody>();
 
 
 
@@ -155,15 +264,12 @@ int main()
 	/////////////////////////////////////     Floor     /////////////////////////////////////
 	std::shared_ptr<Entity> floor = core->add_entity();
 	
-	floor->add_component<TriangleRenderer>();
+	floor->add_component<TriangleRenderer>();  
 
 	floor->get_transform()->setPosition(glm::vec3(0, -2, -7));
 	floor->get_transform()->setScale(glm::vec3(50, 50, 50));
 	floor->get_transform()->setRotation(-90, glm::vec3(1,0,0));
 	/////////////////////////////////////////////////////////////////////////////////////
-	
-
-
 
 
 	core->start();

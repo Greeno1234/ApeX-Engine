@@ -1,12 +1,9 @@
 #include "Component.h"
-
 #include <rend/rend.h>
-
 #include <memory>
 
 namespace apex
 {
-
 	struct Texture;
 	struct Model;
 	struct Camera;
@@ -41,6 +38,4 @@ namespace apex
 		glm::mat4 view;
 
 	};
-
-
 }

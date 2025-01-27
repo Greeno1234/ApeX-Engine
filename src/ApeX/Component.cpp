@@ -3,7 +3,6 @@
 namespace apex
 {
 
-
 	void Component::on_tick() {}
 	void Component::on_display() {}
 	void Component::on_initialize() {}
@@ -22,6 +21,4 @@ namespace apex
 	{
 		on_display();
 	}
-
-
 }

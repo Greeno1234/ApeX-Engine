@@ -22,6 +22,7 @@ namespace apex
 			//create new instance, construct it and add to cache
 			std::shared_ptr<T> rtn = std::make_shared<T>();
 			rtn->m_path = "../resources/" + _path;
+			//rtn->m_path = "resources/" + _path;
 			rtn->load();
 			m_resources.push_back(rtn);
 
@@ -29,7 +30,7 @@ namespace apex
 		}
 
 	private:
-		std::vector<std::shared_ptr<Resource> > m_resources;
+		std::vector<std::shared_ptr<Resource>> m_resources;
 	};
 
 }

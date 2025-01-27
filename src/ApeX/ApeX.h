@@ -10,6 +10,8 @@
 #include "TriangleRenderer.h"
 #include "Keyboard.h"
 #include "Camera.h"
+#include "BoxCollider.h"
+#include "RigidBody.h"
 
 
 #include "Resources.h"
@@ -18,7 +20,3 @@
 #include "Texture.h"
 #include "Model.h"
 #include "Audio.h"
-
-
-
-

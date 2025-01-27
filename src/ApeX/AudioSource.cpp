@@ -23,65 +23,49 @@ namespace apex {
     }
 
 
-void AudioSource::Play()//
-{
-
-
-/*************************************************************************
- * Preparing sound source
- *************************************************************************/
-
-    alGenSources(1, &sourceId);
-
-    alSourcei(sourceId, AL_BUFFER, m_audio->bufferId);
-    alSource3f(sourceId, AL_POSITION, 0.0f, 0.0f, 0.0f); // replace with models location
-    alSourcef(sourceId, AL_PITCH, 1); // lowers pitch and makes it sound like a cat lol
-    //alSourcef(sourceId, AL_GAIN, vol); // raises or lowers volume
-
-    /*************************************************************************
-     * Play audio
-     *************************************************************************/
-    alSourcePlay(sourceId);
-    std::cout << "audio playing";
-    //setLoop(true);
-
-}
-
-void AudioSource::setLoop(bool go)
-{
-
-    /*************************************************************************
-     * Tick
-     *************************************************************************/
-
-
-    while (go)
+    void AudioSource::Play()//
     {
+        // preparing sound source
+        alGenSources(1, &sourceId);
 
-        int state = 0;
-        alGetSourcei(sourceId, AL_SOURCE_STATE, &state);
-        if (state != AL_PLAYING) break;
-        alSourcePlay(sourceId);
+        alSourcei(sourceId, AL_BUFFER, m_audio->bufferId);
+        alSource3f(sourceId, AL_POSITION, 0.0f, 0.0f,0.0f); // position of the sound's source
+        alSourcef(sourceId, AL_PITCH, 1); // raises or lowers pitch
+        //alSourcef(sourceId, AL_GAIN, vol); // raises or lowers volume
+
+        alSourcePlay(sourceId); ///< Play audio
         std::cout << "audio playing";
-        //alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f);
-
-#ifdef _WIN32
-        Sleep(10);
-#else
-        usleep(100 * 1000);
-#endif
+        //setLoop(true);
     }
 
-}
+    void AudioSource::setLoop(bool go)
+    {
+
+        while (go)
+        {
+
+            int state = 0;
+            alGetSourcei(sourceId, AL_SOURCE_STATE, &state);
+            if (state != AL_PLAYING) break;
+            alSourcePlay(sourceId);
+            std::cout << "audio playing";
+            //alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f);
+
+    #ifdef _WIN32
+        Sleep(10);
+    #else
+        usleep(100 * 1000);
+    #endif
+        }
+
+    }
 
 
-AudioSource::~AudioSource()
-{
-    /*************************************************************************
-* Cleanup
-*************************************************************************/
-alDeleteSources(1, &sourceId);
-alDeleteBuffers(1, &m_audio->bufferId); 
-}
+    AudioSource::~AudioSource()
+    {
+    // cleanup
+    alDeleteSources(1, &sourceId);
+    alDeleteBuffers(1, &m_audio->bufferId); 
+    }
 
 }

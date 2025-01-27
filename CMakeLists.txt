@@ -46,6 +46,8 @@ add_library(ApeX
 	src/ApeX/Keyboard.cpp
 	src/ApeX/BoxCollider.h
 	src/ApeX/BoxCollider.cpp
+	src/ApeX/RigidBody.h
+	src/ApeX/RigidBody.cpp
 )
 target_link_libraries(
 	ApeX rend
@@ -71,7 +73,6 @@ add_library(rend
   src/rend/utils.cpp
 )
 target_link_libraries(rend SDL2 GLEW32 OpenGL32 openal32)
-
 
 
 add_executable(demo

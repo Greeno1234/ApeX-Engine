@@ -8,7 +8,7 @@ namespace apex
 	struct Core;
 	struct Component;
 	struct Transform;
-	struct AudioSource; ///
+	struct AudioSource;
 
 	struct Entity
 	{
@@ -53,7 +53,7 @@ namespace apex
 		void tick();
 		void display();
 
-		std::vector<std::shared_ptr<Component> > m_components;
+		std::vector<std::shared_ptr<Component>> m_components;
 		std::weak_ptr<Transform> m_transform;
 		std::weak_ptr<AudioSource> m_audioSource;///
 		bool m_alive = false;

@@ -19,7 +19,9 @@ namespace apex {
 	void TriangleRenderer::on_initialize()
 	{		
 		m_shader = std::make_shared<rend::Shader>(rend::TEXTURE_SHADER); // create a shader
-		m_mesh = std::make_shared<rend::Mesh>(rend::TRIANGLE_MESH); // create a triangle mesh
+		//m_mesh = std::make_shared<rend::Mesh>(rend::TRIANGLE_MESH); // create a triangle mesh
+
+		m_mesh = std::make_shared<rend::Mesh>(rend::QUAD_MESH);
 
 		m_texture = entity()->core()->resources()->load<Texture>("../resources/textures/grass"); //default texture  (can be changed within the main)
 		//m_texture = std::make_shared<rend::Texture>("../resources/textures/brick.png"); // set texture
@@ -40,7 +42,6 @@ namespace apex {
 		//model = entity()->get_component<Transform>()->model();
 		model = entity()->get_transform()->model();
 
-		m_camera = entity()->core()->getCamera();
 		m_shader->attribute("a_Position", *m_mesh->positions());
 		m_shader->attribute("a_TexCoord", *m_mesh->texcoords());
 

@@ -6,9 +6,7 @@
 #include <vector>
 #include <string>
 
-
 #include "stb_vorbis.c"
-
 
 namespace apex {
 
@@ -56,21 +54,11 @@ namespace apex {
         ALenum format = 0;
         ALsizei freq = 0;
         std::vector<unsigned char> bufferData;
-        //load_ogg("../dixie_horn.ogg", bufferData, format, freq);
         load_ogg((std::string(getPath() + ".ogg").c_str()), bufferData, format, freq); //load as resource
-        //load_ogg("../resources/fnaf_honk.ogg", bufferData, format, freq); //load as resource
 
-        //bufferId = 0;
         alGenBuffers(1, &bufferId);
 
         alBufferData(bufferId, format, &bufferData.at(0),
             static_cast<ALsizei>(bufferData.size()), freq);
-
-
     }
-
-
-
-
-
 }
