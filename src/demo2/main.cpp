@@ -16,10 +16,10 @@ struct Player : Component
 	float pitch = 0;
 	//float speed;
 	//        = 
-	float distance = 0.05f;
+	float distance = 0.1f;
 	//        /
 	//float time;
-	bool firstPersonMode = true;
+	bool firstPersonMode = false;
 	bool delay = false;
 
 	void on_initialize()
@@ -158,6 +158,7 @@ int main()
 
 	//Textures
 	std::shared_ptr<Texture> tBrick = core->resources()->load<Texture>("textures/brick");
+	std::shared_ptr<Texture> tWood = core->resources()->load<Texture>("textures/wood");
 	std::shared_ptr<Texture> tControls = core->resources()->load<Texture>("textures/controls");
 
 	//Audio
@@ -176,10 +177,10 @@ int main()
 
 
 	std::shared_ptr<AudioSource> as = player->add_component<AudioSource>();
-	as->setAudio(aHonk); ///< Set audio to honk
+	as->setAudio(aHorn); ///< Set audio to honk
 
 	std::shared_ptr<Renderer> rend = player->add_component<Renderer>();
-	rend->setModel(mCat); //cat player
+	rend->setModel(mCar); //cat player
 
 	player->get_transform()->setScale(glm::vec3(0.3, 0.3, 0.3));
 	player->get_transform()->setPosition(glm::vec3(0, -1.25, -3));
@@ -220,6 +221,10 @@ int main()
 	car->get_transform()->setPosition(glm::vec3(0, -2, -20));
 	car->get_transform()->setScale(glm::vec3(3, 3, 3));
 	car->get_transform()->setRotation(75, glm::vec3(0, 1, 0));
+
+
+
+
 
 	///////////////////////Triangle////////////////////////////////////
 	std::shared_ptr<Entity> controls = core->add_entity();
@@ -270,8 +275,8 @@ int main()
 	/////////////////////////////////////     Floor     /////////////////////////////////////
 	std::shared_ptr<Entity> floor = core->add_entity();
 
-	floor->add_component<TriangleRenderer>();
-
+	std::shared_ptr<TriangleRenderer> tFloor = floor->add_component<TriangleRenderer>();
+	tFloor->setTexture(tWood);
 	floor->get_transform()->setPosition(glm::vec3(0, -2, -7));
 	floor->get_transform()->setScale(glm::vec3(50, 50, 50));
 	floor->get_transform()->setRotation(-90, glm::vec3(1, 0, 0));
